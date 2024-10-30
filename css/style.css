@@ -41,11 +41,10 @@ body {
 
 .header{
     background-image: url('/images/banner-2.jpg');
-    height: 60vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }
-
-
-
 
 
 ul {
@@ -115,6 +114,7 @@ a {
     color: var(--primary-color);
     font-weight: bold;
     font-size: 20px;
+    margin-top: 30px;
 }
 .hero .job{
     color: var(--light-color);
@@ -310,9 +310,15 @@ a {
     .bottom-nav{
         display: none;
     }
+    .header{
+        height: 90vh;
+    }
 }
 @media screen and (max-width: 992px) {
     .bottom-nav{
         display: block;
+    }
+    .header{
+        height: 60vh;
     }
 }
