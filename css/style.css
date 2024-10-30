@@ -7,7 +7,28 @@
     --light-color: #f2f2f2;
 }
 
+.btn-primary{
+    background-color: var(--primary-color);
+    outline: none;
+    border: none;
+}
+.btn-primary:hover{
+    background-color: var(--dark-color);
+    outline: none;
+    border: 1px solid var(--primary-color);
+}
 
+
+.btn-primary:hover span,.btn-primary:hover i{
+    color: var(--light-color) !important;
+}
+.btn-outline-primary{
+    border: 1px solid var(--primary-color);
+}
+.btn-outline-primary:hover{
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color) !important;
+}
 
 body {
     background-color: black;
@@ -192,6 +213,63 @@ a {
 /* ------------------------ projects Section -------------------------------------- */
 .projects-section{
     margin-top: 100px;
+    margin-bottom: 300px !important;
+  
+}
+
+.buttons-filter button{
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    font-size: 13px;
+    outline: none;
+    border: none;
+    border-right: 1px solid var(--light-color);
+    padding: 5px 5px;
+    cursor: pointer;
+    transition: transform .5s ease-in-out;
+}
+.buttons-filter button:hover{
+    transform: translateY(-10px);
+}
+
+.project-item{
+    background-color: var(--dark-color);
+    border-radius: 10px;
+    margin-bottom:10px;
+    padding: 0;
+    padding-bottom: 10px;
+}
+.project-item img{
+    width: 100%;
+    height: 200px !important;  
+}
+.project-title{
+    font-size: 15px;
+    margin: 5px;
+}
+.project-item .tools{
+    flex-wrap: wrap;
+}
+.project-item .tools p{
+    background-color: var(--black-color);
+    color: var(--light-color);
+    margin: 5px;
+    border-radius: 10px;
+    font-size: 10px;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+.project-action a span{
+    font-size: 10px;
+    margin-right: 5px;
+}
+
+
+/* ---------------------- contact Section ----------------------------------------------- */
+.contact-section{
+    margin-top: 200px !important;
+    padding-bottom: 100px;
 }
 
 
@@ -217,4 +295,15 @@ a {
     text-decoration: none;
     font-size: 13px;
     margin-top: 10px;
+}
+
+@media screen and (max-width: 2000px) {
+    .bottom-nav{
+        display: none;
+    }
+}
+@media screen and (max-width: 992px) {
+    .bottom-nav{
+        display: block;
+    }
 }
