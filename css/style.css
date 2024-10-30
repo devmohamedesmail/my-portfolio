@@ -118,13 +118,13 @@ a {
 }
 .hero .job{
     color: var(--light-color);
-    font-size: 35px;
+    font-size: 30px;
     font-weight: bolder;
 }
 
 .hero-contact-items a{
     display: block;
-    margin: 10px;
+    margin: 5px;
     padding: 10px;
     border-radius: 10px;
     color: var(--light-color);
@@ -190,6 +190,9 @@ a {
 
 
 /* -------------------------- skills Section -------------------------------- */
+.skills-container div{
+    margin: 10px;
+}
 .skills-card{
     border-radius: 20px;
     background-color: var(--dark-color);
@@ -217,6 +220,11 @@ a {
   
 }
 
+.buttons-filter{
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
 .buttons-filter button{
     background-color: var(--dark-color);
     color: var(--light-color);
@@ -227,6 +235,7 @@ a {
     padding: 5px 5px;
     cursor: pointer;
     transition: transform .5s ease-in-out;
+    text-wrap: nowrap;
 }
 .buttons-filter button:hover{
     transform: translateY(-10px);
