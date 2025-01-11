@@ -231,14 +231,22 @@ a {
     font-size: 13px;
     outline: none;
     border: none;
-    border-right: 1px solid var(--light-color);
-    padding: 5px 5px;
+    border-right: 2px solid var(--light-color);
+    border-color: var(--primary-color);
+    padding: 5px 10px;
     cursor: pointer;
     transition: transform .5s ease-in-out;
     text-wrap: nowrap;
+    border-radius: 10px;
+    width: 100px;
+    margin: 5px;
+    transition: all .3s ease-in-out;
+
 }
 .buttons-filter button:hover{
-    transform: translateY(-10px);
+    /* transform: translateY(-10px); */
+    background-color: var(--primary-color);
+    color: var(--dark-color);
 }
 
 .project-item{
