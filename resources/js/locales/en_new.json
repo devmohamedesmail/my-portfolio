@@ -1,0 +1,137 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "sidebar": {
+    "platform": "Platform",
+    "dashboard": "Dashboard",
+    "portfolio": "Portfolio",
+    "skills": "Skills",
+    "projects": "Projects",
+    "requests": "Project Requests",
+    "profile": "Profile",
+    "settings": "Settings",
+    "mainMenu": "Main Menu",
+    "resources": "Resources",
+    "repository": "Repository",
+    "documentation": "Documentation",
+    "contentManagement": "Content Management",
+    "analyticsMonitoring": "Analytics & Monitoring",
+    "analytics": "Analytics",
+    "performance": "Performance",
+    "activity": "Activity",
+    "system": "System",
+    "quickStats": "Quick Stats"
+  },
+  "footer": {
+    "copyright": "© 2025 Full-Stack Developer. All rights reserved.",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter"
+  },
+  "contact": {
+    "title": "Let's Build Something Amazing",
+    "subtitle": "Ready to bring your ideas to life? Let's discuss your next project",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "emailValue": "dev.mohamed.esmail@gmail.com",
+    "phoneValue": "+971 58 910 7126",
+    "locationValue": "UNITED ARAB EMIRATES",
+    "startProject": "Start a Project",
+    "whatsapp": "WhatsApp Chat"
+  },
+  "projectRequest": {
+    "title": "Start Your Project",
+    "description": "Tell us about your project idea and we'll get back to you as soon as possible.",
+    "name": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "phone": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "projectIdea": "Project Idea",
+    "projectIdeaPlaceholder": "Describe your project idea, requirements, timeline, and any specific features you need...",
+    "submit": "Submit Request",
+    "submitting": "Submitting...",
+    "cancel": "Cancel",
+    "successTitle": "Request Submitted Successfully!",
+    "successMessage": "Thank you! Your project request has been submitted successfully. We'll get back to you soon.",
+    "successDetails": "We typically respond within 24 hours. Keep an eye on your inbox!",
+    "gotIt": "Got it!",
+    "errorMessage": "Sorry, there was an error submitting your request. Please try again or contact us directly."
+  },
+  "requests": {
+    "title": "Project Requests",
+    "subtitle": "Manage and track all project requests from potential clients",
+    "stats": {
+      "total": "Total Requests",
+      "pending": "Pending",
+      "inProgress": "In Progress",
+      "completed": "Completed"
+    },
+    "status": {
+      "pending": "Pending",
+      "contacted": "Contacted",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "filters": {
+      "title": "Filter Requests",
+      "search": "Search",
+      "searchPlaceholder": "Search by name, email, or project idea...",
+      "status": "Status",
+      "allStatuses": "All Statuses",
+      "apply": "Apply Filter"
+    },
+    "table": {
+      "title": "All Requests",
+      "description": "A comprehensive list of all project requests received",
+      "client": "Client",
+      "contact": "Contact Info",
+      "project": "Project",
+      "status": "Status",
+      "date": "Date"
+    },
+    "actions": {
+      "view": "View Details"
+    },
+    "empty": {
+      "title": "No Requests Found",
+      "description": "No project requests match the current filter."
+    },
+    "show": {
+      "title": "Request Details",
+      "subtitle": "Project request from {{name}}",
+      "clientInfo": "Client Information",
+      "projectInfo": "Project Information",
+      "management": "Request Management",
+      "managementDescription": "Update the status and add notes for this request",
+      "submittedAt": "Submitted At",
+      "lastUpdated": "Last Updated",
+      "currentStatus": "Current Status",
+      "noNotes": "No notes have been added yet"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "projectIdea": "Project Idea",
+      "status": "Status",
+      "notes": "Internal Notes",
+      "notesPlaceholder": "Add notes about this request, follow-up actions, meeting notes, etc."
+    }
+  },
+  "common": {
+    "back": "Back",
+    "edit": "Edit",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel"
+  }
+}

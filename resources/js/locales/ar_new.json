@@ -1,0 +1,137 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "about": "نبذة عني",
+    "skills": "المهارات",
+    "projects": "المشاريع",
+    "contact": "التواصل"
+  },
+  "sidebar": {
+    "platform": "المنصة",
+    "dashboard": "لوحة التحكم",
+    "portfolio": "الملف الشخصي",
+    "skills": "المهارات",
+    "projects": "المشاريع",
+    "requests": "طلبات المشاريع",
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات",
+    "mainMenu": "القائمة الرئيسية",
+    "resources": "الموارد",
+    "repository": "المستودع",
+    "documentation": "التوثيق",
+    "contentManagement": "إدارة المحتوى",
+    "analyticsMonitoring": "التحليلات والمراقبة",
+    "analytics": "التحليلات",
+    "performance": "الأداء",
+    "activity": "النشاط",
+    "system": "النظام",
+    "quickStats": "إحصائيات سريعة"
+  },
+  "footer": {
+    "copyright": "© 2025 مطور التطبيقات الشامل. جميع الحقوق محفوظة.",
+    "github": "GitHub",
+    "linkedin": "لينكد إن",
+    "twitter": "تويتر"
+  },
+  "contact": {
+    "title": "دعنا نبني شيئاً مذهلاً",
+    "subtitle": "جاهز لتحقيق أفكارك؟ دعنا نناقش مشروعك القادم",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "location": "الموقع",
+    "emailValue": "dev.mohamed.esmail@gmail.com",
+    "phoneValue": "+971 58 910 7126",
+    "locationValue": "دولة الإمارات العربية المتحدة",
+    "startProject": "ابدأ مشروعاً",
+    "whatsapp": "دردشة واتساب"
+  },
+  "projectRequest": {
+    "title": "ابدأ مشروعك",
+    "description": "أخبرنا عن فكرة مشروعك وسنتواصل معك في أقرب وقت ممكن.",
+    "name": "الاسم الكامل",
+    "namePlaceholder": "أدخل اسمك الكامل",
+    "email": "عنوان البريد الإلكتروني",
+    "emailPlaceholder": "أدخل عنوان بريدك الإلكتروني",
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم هاتفك",
+    "projectIdea": "فكرة المشروع",
+    "projectIdeaPlaceholder": "اوصف فكرة مشروعك، المتطلبات، الجدول الزمني، وأي ميزات محددة تحتاجها...",
+    "submit": "إرسال الطلب",
+    "submitting": "جاري الإرسال...",
+    "cancel": "إلغاء",
+    "successTitle": "تم إرسال الطلب بنجاح!",
+    "successMessage": "شكراً لك! تم إرسال طلب مشروعك بنجاح. سنتواصل معك قريباً.",
+    "successDetails": "عادة ما نرد خلال 24 ساعة. راقب صندوق البريد الوارد!",
+    "gotIt": "فهمت!",
+    "errorMessage": "عذراً، حدث خطأ أثناء إرسال طلبك. يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة."
+  },
+  "requests": {
+    "title": "طلبات المشاريع",
+    "subtitle": "إدارة وتتبع جميع طلبات المشاريع من العملاء المحتملين",
+    "stats": {
+      "total": "إجمالي الطلبات",
+      "pending": "في الانتظار",
+      "inProgress": "قيد التنفيذ",
+      "completed": "مكتملة"
+    },
+    "status": {
+      "pending": "في الانتظار",
+      "contacted": "تم التواصل",
+      "inProgress": "قيد التنفيذ",
+      "completed": "مكتمل",
+      "cancelled": "ملغي"
+    },
+    "filters": {
+      "title": "تصفية الطلبات",
+      "search": "البحث",
+      "searchPlaceholder": "البحث بالاسم أو البريد الإلكتروني أو فكرة المشروع...",
+      "status": "الحالة",
+      "allStatuses": "جميع الحالات",
+      "apply": "تطبيق التصفية"
+    },
+    "table": {
+      "title": "جميع الطلبات",
+      "description": "قائمة شاملة بجميع طلبات المشاريع المستلمة",
+      "client": "العميل",
+      "contact": "معلومات التواصل",
+      "project": "المشروع",
+      "status": "الحالة",
+      "date": "التاريخ"
+    },
+    "actions": {
+      "view": "عرض التفاصيل"
+    },
+    "empty": {
+      "title": "لم يتم العثور على طلبات",
+      "description": "لا توجد طلبات مشاريع تتطابق مع التصفية الحالية."
+    },
+    "show": {
+      "title": "تفاصيل الطلب",
+      "subtitle": "طلب مشروع من {{name}}",
+      "clientInfo": "معلومات العميل",
+      "projectInfo": "معلومات المشروع",
+      "management": "إدارة الطلب",
+      "managementDescription": "تحديث الحالة وإضافة ملاحظات لهذا الطلب",
+      "submittedAt": "تاريخ الإرسال",
+      "lastUpdated": "آخر تحديث",
+      "currentStatus": "الحالة الحالية",
+      "noNotes": "لم تتم إضافة ملاحظات بعد"
+    },
+    "form": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "projectIdea": "فكرة المشروع",
+      "status": "الحالة",
+      "notes": "ملاحظات داخلية",
+      "notesPlaceholder": "أضف ملاحظات حول هذا الطلب، إجراءات المتابعة، ملاحظات الاجتماع، إلخ."
+    }
+  },
+  "common": {
+    "back": "رجوع",
+    "edit": "تعديل",
+    "save": "حفظ",
+    "saving": "جاري الحفظ...",
+    "cancel": "إلغاء"
+  }
+}

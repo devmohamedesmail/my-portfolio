@@ -1,0 +1,1265 @@
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --font-sans:
+        'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+:root {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.87 0 0);
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.398 0.07 227.392);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+    --radius: 0.625rem;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.87 0 0);
+}
+
+.dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.145 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.145 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.985 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.396 0.141 25.723);
+    --destructive-foreground: oklch(0.637 0.237 25.331);
+    --border: oklch(0.269 0 0);
+    --input: oklch(0.269 0 0);
+    --ring: oklch(0.439 0 0);
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.985 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(0.269 0 0);
+    --sidebar-ring: oklch(0.439 0 0);
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Custom Portfolio Animations */
+@keyframes blob {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+        transform: translate(0px, 0px) scale(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(139, 92, 246, 0.5);
+    }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInScale {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes rotateGlow {
+    0% {
+        transform: rotate(0deg);
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        filter: hue-rotate(360deg);
+    }
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    0%, 50% {
+        border-color: transparent;
+    }
+    51%, 100% {
+        border-color: #3b82f6;
+    }
+}
+
+/* Animation Classes */
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.animate-slide-in-left {
+    animation: slideInFromLeft 0.8s ease-out;
+}
+
+.animate-slide-in-right {
+    animation: slideInFromRight 0.8s ease-out;
+}
+
+.animate-slide-in-bottom {
+    animation: slideInFromBottom 0.8s ease-out;
+}
+
+.animate-fade-in-scale {
+    animation: fadeInScale 0.8s ease-out;
+}
+
+.animate-rotate-glow {
+    animation: rotateGlow 3s linear infinite;
+}
+
+.animate-typing {
+    animation: typing 3.5s steps(30, end), blink 0.75s step-end infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid #3b82f6;
+}
+
+/* Technical Skills Animations */
+@keyframes skillProgress {
+    0% {
+        width: 0%;
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes skillGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px currentColor;
+    }
+    50% {
+        box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+    }
+}
+
+@keyframes skillPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes skillRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes skillBounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.skill-progress {
+    animation: skillProgress 2s ease-out forwards;
+}
+
+.skill-glow {
+    animation: skillGlow 2s ease-in-out infinite;
+}
+
+.skill-pulse {
+    animation: skillPulse 2s ease-in-out infinite;
+}
+
+.skill-rotate {
+    animation: skillRotate 10s linear infinite;
+}
+
+.skill-bounce {
+    animation: skillBounce 2s infinite;
+}
+
+/* Skill card hover effects */
+.skill-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s;
+}
+
+.skill-card:hover::before {
+    left: 100%;
+}
+
+/* Hexagon skill layout */
+.hexagon-skill {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    margin: 20px auto;
+}
+
+.hexagon-skill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--skill-color-1, #3b82f6), var(--skill-color-2, #8b5cf6));
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    transition: all 0.3s ease;
+}
+
+.hexagon-skill:hover::before {
+    transform: scale(1.1) rotate(5deg);
+    filter: brightness(1.2);
+}
+
+.hexagon-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
+}
+
+/* Circular progress for skills */
+.circular-progress {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.circular-progress svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.circular-progress .circle-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.circular-progress .circle-progress {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 2s ease;
+}
+
+/* Skill category tabs */
+.skill-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skill-tab {
+    padding: 1rem 2rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.skill-tab.active {
+    border-bottom-color: #3b82f6;
+}
+
+.skill-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    transition: width 0.3s ease;
+}
+
+.skill-tab:hover::after {
+    width: 100%;
+}
+
+/* 3D skill cards */
+.skill-3d {
+    perspective: 1000px;
+}
+
+.skill-3d-inner {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.skill-3d:hover .skill-3d-inner {
+    transform: rotateY(180deg);
+}
+
+.skill-3d-front,
+.skill-3d-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.skill-3d-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+/* Skill radar chart styles */
+.skill-radar {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.radar-grid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+}
+
+.radar-grid circle {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 1;
+}
+
+.radar-grid line {
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 1;
+}
+
+/* Skill mastery levels */
+.mastery-beginner {
+    background: linear-gradient(135deg, #ef4444, #f97316);
+}
+
+.mastery-intermediate {
+    background: linear-gradient(135deg, #f59e0b, #eab308);
+}
+
+.mastery-advanced {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.mastery-expert {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.mastery-master {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+/* Enhanced Project Animations */
+@keyframes projectCardFloat {
+    0%, 100% {
+        transform: translateY(0px) rotateX(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotateX(2deg);
+    }
+}
+
+@keyframes projectGlow {
+    0%, 100% {
+        box-shadow: 0 10px 40px rgba(59, 130, 246, 0.1);
+    }
+    50% {
+        box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3);
+    }
+}
+
+@keyframes projectBorderRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes projectTechBadgeSlide {
+    0% {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes projectStatCounter {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes projectFloatingElements {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.7;
+    }
+    33% {
+        transform: translateY(-15px) rotate(120deg);
+        opacity: 1;
+    }
+    66% {
+        transform: translateY(-8px) rotate(240deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(0px) rotate(360deg);
+        opacity: 0.7;
+    }
+}
+
+@keyframes projectImageReveal {
+    0% {
+        clip-path: circle(0% at 50% 50%);
+    }
+    100% {
+        clip-path: circle(100% at 50% 50%);
+    }
+}
+
+@keyframes projectButtonSlideUp {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes projectTitleTypewriter {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes projectCardTilt {
+    0% {
+        transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    }
+    25% {
+        transform: perspective(1000px) rotateX(2deg) rotateY(1deg);
+    }
+    50% {
+        transform: perspective(1000px) rotateX(0deg) rotateY(2deg);
+    }
+    75% {
+        transform: perspective(1000px) rotateX(-1deg) rotateY(1deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    }
+}
+
+/* Project Animation Classes */
+.project-card-float {
+    animation: projectCardFloat 6s ease-in-out infinite;
+}
+
+.project-glow {
+    animation: projectGlow 3s ease-in-out infinite;
+}
+
+.project-border-rotate {
+    animation: projectBorderRotate 10s linear infinite;
+}
+
+.project-tech-badge-slide {
+    animation: projectTechBadgeSlide 0.6s ease-out forwards;
+}
+
+.project-stat-counter {
+    animation: projectStatCounter 0.8s ease-out forwards;
+}
+
+.project-floating-elements {
+    animation: projectFloatingElements 8s ease-in-out infinite;
+}
+
+.project-image-reveal {
+    animation: projectImageReveal 1s ease-out forwards;
+}
+
+.project-button-slide-up {
+    animation: projectButtonSlideUp 0.4s ease-out forwards;
+}
+
+.project-title-typewriter {
+    animation: projectTitleTypewriter 2s ease-out forwards;
+}
+
+.project-card-tilt {
+    animation: projectCardTilt 4s ease-in-out infinite;
+}
+
+/* 3D Project Card Effects */
+.project-3d-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.3s ease;
+}
+
+.project-3d-card:hover {
+    transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+}
+
+.project-3d-face {
+    backface-visibility: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+/* Project Particle Effects */
+.project-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.project-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #3b82f6, transparent);
+    border-radius: 50%;
+    animation: projectParticleFloat 4s infinite ease-in-out;
+}
+
+@keyframes projectParticleFloat {
+    0%, 100% {
+        transform: translateY(0) translateX(0) scale(0);
+        opacity: 0;
+    }
+    10% {
+        transform: translateY(-10px) translateX(5px) scale(1);
+        opacity: 1;
+    }
+    90% {
+        transform: translateY(-100px) translateX(20px) scale(0.5);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-120px) translateX(30px) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Project Hover Magnetic Effect */
+.project-magnetic {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-magnetic:hover {
+    transform: translate3d(0, -8px, 0) scale(1.02);
+}
+
+/* Project Loading Shimmer */
+.project-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    animation: projectShimmerMove 2s infinite;
+}
+
+@keyframes projectShimmerMove {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Project Success Indicators */
+.project-success-pulse {
+    animation: projectSuccessPulse 2s infinite;
+}
+
+@keyframes projectSuccessPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+/* Floating Contact Button Animations */
+@keyframes floatContactButton {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-3px) rotate(1deg);
+    }
+    50% {
+        transform: translateY(-6px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-3px) rotate(-1deg);
+    }
+}
+
+@keyframes floatMainButton {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(139, 92, 246, 0.4);
+    }
+}
+
+@keyframes contactButtonRipple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes contactButtonPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes contactButtonGlow {
+    0%, 100% {
+        box-shadow: 
+            0 0 20px rgba(59, 130, 246, 0.3),
+            0 0 40px rgba(139, 92, 246, 0.2),
+            0 0 60px rgba(236, 72, 153, 0.1);
+    }
+    50% {
+        box-shadow: 
+            0 0 30px rgba(59, 130, 246, 0.5),
+            0 0 60px rgba(139, 92, 246, 0.4),
+            0 0 90px rgba(236, 72, 153, 0.3);
+    }
+}
+
+@keyframes contactButtonSlideIn {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes contactButtonBounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translate3d(0, 0, 0);
+    }
+    40%, 43% {
+        transform: translate3d(0, -30px, 0);
+    }
+    70% {
+        transform: translate3d(0, -15px, 0);
+    }
+    90% {
+        transform: translate3d(0, -4px, 0);
+    }
+}
+
+@keyframes contactButtonSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes contactTooltipSlide {
+    0% {
+        transform: translateX(10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes contactParticleFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.7;
+    }
+    33% {
+        transform: translateY(-10px) scale(1.2);
+        opacity: 1;
+    }
+    66% {
+        transform: translateY(-5px) scale(0.8);
+        opacity: 0.8;
+    }
+}
+
+@keyframes contactStatusBlink {
+    0%, 100% {
+        background-color: #22c55e;
+        transform: scale(1);
+    }
+    50% {
+        background-color: #16a34a;
+        transform: scale(1.1);
+    }
+}
+
+/* Floating Contact Animation Classes */
+.float-contact-button {
+    animation: floatContactButton 3s ease-in-out infinite;
+}
+
+.float-main-button {
+    animation: floatMainButton 4s ease-in-out infinite;
+}
+
+.contact-button-ripple {
+    animation: contactButtonRipple 0.6s linear;
+}
+
+.contact-button-pulse {
+    animation: contactButtonPulse 2s ease-in-out infinite;
+}
+
+.contact-button-glow {
+    animation: contactButtonGlow 3s ease-in-out infinite;
+}
+
+.contact-button-slide-in {
+    animation: contactButtonSlideIn 0.5s ease-out;
+}
+
+.contact-button-bounce {
+    animation: contactButtonBounce 1s ease;
+}
+
+.contact-button-spin {
+    animation: contactButtonSpin 2s linear infinite;
+}
+
+.contact-tooltip-slide {
+    animation: contactTooltipSlide 0.3s ease-out;
+}
+
+.contact-particle-float {
+    animation: contactParticleFloat 2s ease-in-out infinite;
+}
+
+.contact-status-blink {
+    animation: contactStatusBlink 2s ease-in-out infinite;
+}
+
+/* Hover effects for floating contact buttons */
+.floating-contact-hover:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.floating-contact-hover:hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    animation: contactButtonSpin 2s linear infinite;
+}
+
+/* Contact button magnetic effect */
+.contact-magnetic {
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.contact-magnetic:hover {
+    transform: scale(1.1) translateZ(0);
+}
+
+/* Contact button glass morphism */
+.contact-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive floating contact */
+@media (max-width: 768px) {
+    .float-contact-button,
+    .float-main-button {
+        animation-duration: 2s;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    .float-contact-button,
+    .float-main-button,
+    .contact-button-pulse,
+    .contact-button-glow {
+        animation: none;
+    }
+}
+
+/* RTL Support for Arabic */
+.rtl {
+    direction: rtl;
+}
+
+.rtl .text-left {
+    text-align: right;
+}
+
+.rtl .text-right {
+    text-align: left;
+}
+
+/* RTL Spacing adjustments */
+.rtl .ml-2 {
+    margin-left: 0;
+    margin-right: 0.5rem;
+}
+
+.rtl .mr-2 {
+    margin-right: 0;
+    margin-left: 0.5rem;
+}
+
+.rtl .ml-4 {
+    margin-left: 0;
+    margin-right: 1rem;
+}
+
+.rtl .mr-4 {
+    margin-right: 0;
+    margin-left: 1rem;
+}
+
+.rtl .pl-4 {
+    padding-left: 0;
+    padding-right: 1rem;
+}
+
+.rtl .pr-4 {
+    padding-right: 0;
+    padding-left: 1rem;
+}
+
+/* RTL Floating elements */
+.rtl .right-8 {
+    right: auto;
+    left: 2rem;
+}
+
+.rtl .left-8 {
+    left: auto;
+    right: 2rem;
+}
+
+/* RTL Border radius */
+.rtl .rounded-l-lg {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.rtl .rounded-r-lg {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+
+/* RTL Transform adjustments */
+.rtl .transform.translate-x-16 {
+    transform: translateX(-4rem);
+}
+
+.rtl .transform.-translate-x-16 {
+    transform: translateX(4rem);
+}
+
+/* RTL tooltip positioning */
+.rtl .right-16 {
+    right: auto;
+    left: 4rem;
+}
+
+.rtl .left-full {
+    left: auto;
+    right: 100%;
+}
+
+.rtl .border-l-gray-900 {
+    border-left-color: transparent;
+    border-right-color: #111827;
+}
+
+/* RTL Animations for Arabic */
+.rtl .skill-bounce {
+    animation: skillBounceRTL 2s infinite;
+}
+
+@keyframes skillBounceRTL {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) scaleX(-1);
+    }
+    40% {
+        transform: translateY(-10px) scaleX(-1);
+    }
+    60% {
+        transform: translateY(-5px) scaleX(-1);
+    }
+}
+
+/* RTL Navigation adjustments */
+.rtl .space-x-8 > :not([hidden]) ~ :not([hidden]) {
+    margin-right: 2rem;
+    margin-left: 0;
+}
+
+.rtl .flex-row-reverse {
+    flex-direction: row-reverse;
+}
+
+/* RTL Grid adjustments */
+.rtl .justify-start {
+    justify-content: flex-end;
+}
+
+.rtl .justify-end {
+    justify-content: flex-start;
+}
+
+/* RTL Text alignment for Arabic */
+.rtl h1,
+.rtl h2,
+.rtl h3,
+.rtl h4,
+.rtl h5,
+.rtl h6 {
+    text-align: center;
+}
+
+.rtl p {
+    text-align: right;
+}
+
+.rtl .text-center {
+    text-align: center !important;
+}
+
+/* Arabic font optimization */
+[dir="rtl"] {
+    font-family: 'Tajawal', 'Cairo', 'Amiri', 'IBM Plex Sans Arabic', 'Noto Sans Arabic', sans-serif;
+}
+
+/* RTL Layout improvements */
+.rtl .flex.justify-between {
+    flex-direction: row-reverse;
+}
+
+.rtl .gap-4 > * {
+    order: -1;
+}
+
+.rtl .order-first {
+    order: 999;
+}
+
+.rtl .order-last {
+    order: -999;
+}
