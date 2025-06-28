@@ -79,6 +79,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         
         // Activity Routes
         Route::get('activity', [ActivityController::class, 'index'])->name('activity.index');
+        
+        // Clients Routes
+        Route::resource('clients', \App\Http\Controllers\ClientController::class);
     });
 });
 

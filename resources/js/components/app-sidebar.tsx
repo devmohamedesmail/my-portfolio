@@ -14,7 +14,9 @@ import {
     Zap,
     Layers,
     MessageSquare,
-    Users
+    Users,
+    UserCheck,
+    Archive
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import Logo from './logo';
@@ -42,9 +44,19 @@ export default function AppSidebar() {
             icon: Briefcase,
         },
         {
+            title: t('sidebar.clients'),
+            href: '/admin/clients',
+            icon: UserCheck,
+        },
+        {
             title: t('sidebar.requests'),
             href: '/admin/requests',
             icon: MessageSquare,
+        },
+        {
+            title: t('sidebar.imports'),
+            href: '/admin/imports',
+            icon: Archive,
         },
     ];
 
