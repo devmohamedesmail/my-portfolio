@@ -16,21 +16,38 @@ import { ArrowLeft, Archive, Upload, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import AuthenticatedLayout from '@/layouts/app-layout';
 
-export default function ImportsCreate() {
+interface Import {
+    id: number;
+    title: string;
+    description: string;
+    type: string;
+    content: string;
+    file_path: string;
+    file_name: string;
+    file_type: string;
+    file_size: number;
+    metadata: any;
+}
+
+interface Props {
+    import: Import;
+}
+
+export default function ImportsEdit({ import: importItem }: Props) {
     const { t } = useTranslation();
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     
-    const { data, setData, post, processing, errors } = useForm({
-        title: '',
-        description: '',
-        type: 'other',
-        content: '',
+    const { data, setData, put, processing, errors } = useForm({
+        title: importItem.title || '',
+        description: importItem.description || '',
+        type: importItem.type || 'other',
+        content: importItem.content || '',
         file: null as File | null,
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post('/admin/imports', {
+        put(`/admin/imports/${importItem.id}`, {
             forceFormData: true,
         });
     };
@@ -56,7 +73,7 @@ export default function ImportsCreate() {
 
     return (
         <AuthenticatedLayout>
-            <Head title={t('imports.create')} />
+            <Head title={t('imports.edit')} />
 
             <div className="container mx-auto py-6">
                 <div className="flex flex-col space-y-6">
@@ -69,8 +86,8 @@ export default function ImportsCreate() {
                         </Button>
                         <Archive className="h-8 w-8 text-primary" />
                         <div>
-                            <h1 className="text-3xl font-bold tracking-tight">{t('imports.create')}</h1>
-                            <p className="text-muted-foreground">{t('imports.createDescription')}</p>
+                            <h1 className="text-3xl font-bold tracking-tight">{t('imports.edit')}</h1>
+                            <p className="text-muted-foreground">{t('imports.editDescription')}</p>
                         </div>
                     </div>
 
@@ -152,9 +169,36 @@ export default function ImportsCreate() {
                                     )}
                                 </div>
 
-                                {/* File Upload */}
+                                {/* Current File */}
+                                {importItem.file_path && (
+                                    <div className="space-y-2">
+                                        <Label>{t('imports.currentFile')}</Label>
+                                        <div className="border rounded-lg p-4 bg-gray-50">
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center space-x-3">
+                                                    <div className="h-10 w-10 flex items-center justify-center bg-primary/10 rounded">
+                                                        <Upload className="h-5 w-5 text-primary" />
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm font-medium">{importItem.file_name}</p>
+                                                        <p className="text-xs text-muted-foreground">
+                                                            {formatFileSize(importItem.file_size)} • {importItem.file_type}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <Button variant="outline" size="sm" asChild>
+                                                    <a href={importItem.file_path} target="_blank" rel="noopener noreferrer">
+                                                        {t('common.view')}
+                                                    </a>
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* New File Upload */}
                                 <div className="space-y-2">
-                                    <Label htmlFor="file">{t('imports.fields.file')}</Label>
+                                    <Label htmlFor="file">{t('imports.fields.newFile')}</Label>
                                     {!selectedFile ? (
                                         <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                                             <Upload className="mx-auto h-12 w-12 text-gray-400" />
@@ -211,7 +255,7 @@ export default function ImportsCreate() {
                                         <Link href="/admin/imports">{t('common.cancel')}</Link>
                                     </Button>
                                     <Button type="submit" disabled={processing}>
-                                        {processing ? t('common.saving') : t('common.save')}
+                                        {processing ? t('common.updating') : t('common.update')}
                                     </Button>
                                 </div>
                             </form>

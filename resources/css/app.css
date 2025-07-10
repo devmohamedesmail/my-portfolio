@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
 @import 'tailwindcss';
 
 @plugin 'tailwindcss-animate';
@@ -1262,4 +1263,14 @@
 
 .rtl .order-last {
     order: -999;
+}
+
+
+html[lang="ar"] {
+    direction: rtl;
+    text-align: right;
+}
+
+html[lang="ar"] * {
+    font-family: "Cairo", sans-serif !important;
 }

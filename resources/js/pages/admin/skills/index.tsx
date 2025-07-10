@@ -150,9 +150,35 @@ export default function SkillsIndex() {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title={t('adminSkills.pageTitle')} />
+            <Head title={t('adminSkills.pageTitle')} >
+                 <title>{t('meta.title')}</title>
+                <meta name="description" content={t('meta.description')} />
+                <meta name="keywords" content={t('meta.keywords')} />
+                <meta httpEquiv="Content-Language" content="ar" />
+                <meta name="robots" content="index, follow" />
+                <meta name="author" content="Mohamed Esmail" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="subject" content={t('meta.subject')} />
+                <meta property="og:title" content={t('meta.title')} />
+                <meta property="og:description" content={t('meta.description')} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://yourwebsite.com" />
+                <meta property="og:image" content="https://yourwebsite.com/images/preview.jpg" />
+                <meta property="og:locale" content="ar_AR" />
 
-            <div className="space-y-6 px-10">
+                {/* تحسينات تويتر */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={t('meta.title')} />
+                <meta name="twitter:description" content={t('meta.description')} />
+                <meta name="twitter:image" content="https://yourwebsite.com/images/preview.jpg" />
+                <link rel="icon" href="https://res.cloudinary.com/dkcoe5fam/image/upload/v1751560468/Esmail_4bdb513f9a.png" />
+                <link rel="apple-touch-icon" href="https://res.cloudinary.com/dkcoe5fam/image/upload/v1751560468/Esmail_4bdb513f9a.png" />
+                <link rel="manifest" href="https://res.cloudinary.com/dkcoe5fam/image/upload/v1751560468/Esmail_4bdb513f9a.png" />
+
+            </Head>
+
+            <div className="space-y-6 px-10 py-6">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
@@ -246,7 +272,7 @@ export default function SkillsIndex() {
                                             checked={data.featured}
                                             onCheckedChange={(checked) => handleFilterChange('featured', checked)}
                                         />
-                                        <Label htmlFor="featured">{t('adminSkills.featuredOnly')}</Label>
+                                        <Label htmlFor="featured">{t('adminSkills.showFeatured')}</Label>
                                     </div>
                                     <div className="flex items-center space-x-2 pt-6">
                                         <Switch
@@ -254,7 +280,7 @@ export default function SkillsIndex() {
                                             checked={data.active}
                                             onCheckedChange={(checked) => handleFilterChange('active', checked)}
                                         />
-                                        <Label htmlFor="active">{t('adminSkills.activeOnly')}</Label>
+                                        <Label htmlFor="active">{t('adminSkills.showActive')}</Label>
                                     </div>
                                 </div>
                             </>
@@ -268,15 +294,15 @@ export default function SkillsIndex() {
                         <CardContent className="flex flex-col items-center justify-center py-12">
                             <Code className="w-12 h-12 text-gray-400 mb-4" />
                             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                                No skills found
+                                {t('adminSkills.noSkills')}
                             </h3>
                             <p className="text-gray-600 dark:text-gray-400 text-center mb-4">
                                 {Object.values(filters).some(Boolean) 
-                                    ? "No skills match your current filters. Try adjusting your search criteria."
-                                    : "Get started by creating your first skill."}
+                                    ? t('adminSkills.noSkillsDescription')
+                                    : t('adminSkills.noSkillsDescription')}
                             </p>
                             <Link href={route('admin.skills.create')}>
-                                <Button>Add Your First Skill</Button>
+                                <Button>{t('adminSkills.addNewSkill')}</Button>
                             </Link>
                         </CardContent>
                     </Card>
@@ -312,29 +338,29 @@ export default function SkillsIndex() {
                                                 <DropdownMenuItem asChild>
                                                     <Link href={route('admin.skills.show', skill.id)}>
                                                         <Eye className="w-4 h-4 mr-2" />
-                                                        View
+                                                        {t('adminSkills.view')}
                                                     </Link>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem asChild>
                                                     <Link href={route('admin.skills.edit', skill.id)}>
                                                         <Edit className="w-4 h-4 mr-2" />
-                                                        Edit
+                                                        {t('adminSkills.edit')}
                                                     </Link>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem onClick={() => toggleFeatured(skill)}>
                                                     <Star className={`w-4 h-4 mr-2 ${skill.featured ? 'fill-yellow-400 text-yellow-400' : ''}`} />
-                                                    {skill.featured ? 'Unfeature' : 'Feature'}
+                                                    {t('adminSkills.toggleFeatured')}
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem onClick={() => toggleActive(skill)}>
                                                     {skill.active ? <EyeOff className="w-4 h-4 mr-2" /> : <Eye className="w-4 h-4 mr-2" />}
-                                                    {skill.active ? 'Deactivate' : 'Activate'}
+                                                    {t('adminSkills.toggleActive')}
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem 
                                                     onClick={() => deleteSkill(skill)}
                                                     className="text-red-600"
                                                 >
                                                     <Trash2 className="w-4 h-4 mr-2" />
-                                                    Delete
+                                                    {t('adminSkills.delete')}
                                                 </DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
@@ -350,7 +376,7 @@ export default function SkillsIndex() {
                                     {/* Progress Bar */}
                                     <div>
                                         <div className="flex justify-between items-center mb-1">
-                                            <span className="text-sm font-medium">Proficiency</span>
+                                            <span className="text-sm font-medium">{t('adminSkills.proficiencyLevel')}</span>
                                             <span className="text-sm text-gray-600 dark:text-gray-400">{skill.level}%</span>
                                         </div>
                                         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
@@ -379,7 +405,7 @@ export default function SkillsIndex() {
                                         <div className="flex items-center gap-1">
                                             <Star className={`w-4 h-4 ${skill.featured ? 'fill-yellow-400 text-yellow-400' : 'text-gray-400'}`} />
                                             <span className="text-xs text-gray-600 dark:text-gray-400">
-                                                {skill.featured ? 'Featured' : 'Regular'}
+                                                {skill.featured ? t('adminSkills.featured') : 'Regular'}
                                             </span>
                                         </div>
                                         <div className="flex items-center gap-1">
@@ -389,12 +415,12 @@ export default function SkillsIndex() {
                                                 <EyeOff className="w-4 h-4 text-gray-400" />
                                             )}
                                             <span className="text-xs text-gray-600 dark:text-gray-400">
-                                                {skill.active ? 'Active' : 'Inactive'}
+                                                {skill.active ? t('adminSkills.active') : t('adminSkills.inactive')}
                                             </span>
                                         </div>
                                         <div className="ml-auto">
                                             <span className="text-xs text-gray-400">
-                                                Priority: {skill.priority}
+                                                {t('adminSkills.priority')}: {skill.priority}
                                             </span>
                                         </div>
                                     </div>

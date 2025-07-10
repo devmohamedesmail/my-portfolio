@@ -27,7 +27,7 @@ export default function CreateProject({ categories, statuses }: CreateProjectPro
         demo_url: '',
         github_url: '',
         website_url: '',
-        image: '',
+        image: null as File | null,
         gallery: [] as string[],
         icon: '',
         technologies: [] as string[],
@@ -53,7 +53,24 @@ export default function CreateProject({ categories, statuses }: CreateProjectPro
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        post(route('admin.projects.store'))
+        
+        // Create FormData for file upload
+        const formData = new FormData()
+        
+        // Add all form fields to FormData
+        Object.entries(data).forEach(([key, value]) => {
+            if (key === 'image' && value instanceof File) {
+                formData.append(key, value)
+            } else if (key === 'technologies' || key === 'gallery') {
+                formData.append(key, JSON.stringify(value))
+            } else if (value !== null && value !== undefined) {
+                formData.append(key, String(value))
+            }
+        })
+        
+        post(route('admin.projects.store'), {
+            forceFormData: true,
+        })
     }
 
     const generateSlug = (title: string) => {
@@ -397,10 +414,9 @@ export default function CreateProject({ categories, statuses }: CreateProjectPro
                                         <Label htmlFor="image">{t('adminProjects.featuredImageUrl')}</Label>
                                         <Input
                                             id="image"
-                                            type="url"
-                                            value={data.image}
-                                            onChange={(e) => setData('image', e.target.value)}
-                                            placeholder={t('adminProjects.featuredImagePlaceholder')}
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={(e) => setData('image', e.target.files ? e.target.files[0] : null)}
                                             className={errors.image ? 'border-red-500' : ''}
                                         />
                                         {errors.image && (

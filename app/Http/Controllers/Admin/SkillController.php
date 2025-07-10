@@ -77,6 +77,7 @@ class SkillController extends Controller
             'name' => 'required|string|max:255|unique:skills',
             'description' => 'nullable|string',
             'icon' => 'nullable|string|max:10',
+            'image' => 'nullable|image|max:2048', // 2MB max
             'color' => 'nullable|string|max:7',
             'background_gradient' => 'nullable|string|max:255',
             'level' => 'required|integer|min:0|max:100',
@@ -92,8 +93,7 @@ class SkillController extends Controller
             'certification_url' => 'nullable|url',
         ]);
 
-
-          // upload image to cloudinary
+        // Upload image to cloudinary
         if ($request->hasFile('image')) {
             $cloudinary = new Cloudinary([
                 'cloud' => [
@@ -104,10 +104,9 @@ class SkillController extends Controller
             ]);
 
             $uploaded = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
-                'folder' => 'categories',
+                'folder' => 'skills',
             ]);
 
-            // حفظ الرابط النهائي في الحقل `image`
             $validated['image'] = $uploaded['secure_url'];
         }
 
@@ -135,14 +134,14 @@ class SkillController extends Controller
     }
 
     public function update(Request $request, Skill $skill)
-    {
-
-        dd($request->all());
+    { 
+        
+        
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255', Rule::unique('skills')->ignore($skill->id)],
             'description' => 'nullable|string',
             'icon' => 'nullable|string|max:10',
-            'image' => 'nullable|image', // 2MB max
+            'image' => 'nullable|image|max:2048', // 2MB max
             'color' => 'nullable|string|max:7',
             'background_gradient' => 'nullable|string|max:255',
             'level' => 'required|integer|min:0|max:100',
@@ -158,7 +157,11 @@ class SkillController extends Controller
             'certification_url' => 'nullable|url',
         ]);
 
-           // upload image to cloudinary
+        // Convert boolean strings to actual booleans
+        $validated['featured'] = filter_var($request->input('featured'), FILTER_VALIDATE_BOOLEAN);
+        $validated['active'] = filter_var($request->input('active'), FILTER_VALIDATE_BOOLEAN);
+
+        // Upload image to cloudinary
         if ($request->hasFile('image')) {
             $cloudinary = new Cloudinary([
                 'cloud' => [
@@ -169,13 +172,11 @@ class SkillController extends Controller
             ]);
 
             $uploaded = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
-                'folder' => 'categories',
+                'folder' => 'skills',
             ]);
 
-            // حفظ الرابط النهائي في الحقل `image`
             $validated['image'] = $uploaded['secure_url'];
         }
-        dd($validated);
 
         $skill->update($validated);
 

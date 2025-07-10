@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { Head, Link, router, useForm, usePage } from '@inertiajs/react';
-import { 
-    Plus, 
-    Search, 
-    Filter, 
-    Star, 
-    Eye, 
-    EyeOff, 
-    Edit, 
-    Trash2, 
+import {
+    Plus,
+    Search,
+    Filter,
+    Star,
+    Eye,
+    EyeOff,
+    Edit,
+    Trash2,
     MoreVertical,
     Globe,
     Github,
@@ -32,6 +32,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
 import { BreadcrumbItem } from '@/types';
+import { useTranslation } from 'react-i18next';
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
@@ -89,7 +90,7 @@ interface ProjectsPageProps {
 export default function ProjectsIndex() {
     const { projects, filters, categories, statuses } = usePage<ProjectsPageProps>().props;
     const [showFilters, setShowFilters] = useState(false);
-
+    const { t } = useTranslation();
     const { data, setData, get, processing } = useForm({
         search: filters.search || '',
         category: filters.category || 'all',
@@ -124,7 +125,7 @@ export default function ProjectsIndex() {
     };
 
     const deleteProject = (project: Project) => {
-        if (confirm('Are you sure you want to delete this project?')) {
+        if (confirm(t('adminProjects.deleteConfirmation'))) {
             router.delete(route('admin.projects.destroy', project.id));
         }
     };
@@ -164,21 +165,47 @@ export default function ProjectsIndex() {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Projects Management" />
+            <Head title={t('adminProjects.pageTitle')} >
+                <title>{t('meta.title')}</title>
+                <meta name="description" content={t('meta.description')} />
+                <meta name="keywords" content={t('meta.keywords')} />
+                <meta httpEquiv="Content-Language" content="ar" />
+                <meta name="robots" content="index, follow" />
+                <meta name="author" content="Mohamed Esmail" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="subject" content={t('meta.subject')} />
+                <meta property="og:title" content={t('meta.title')} />
+                <meta property="og:description" content={t('meta.description')} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://yourwebsite.com" />
+                <meta property="og:image" content="https://yourwebsite.com/images/preview.jpg" />
+                <meta property="og:locale" content="ar_AR" />
 
-            <div className="space-y-6 px-10">
+                {/* تحسينات تويتر */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={t('meta.title')} />
+                <meta name="twitter:description" content={t('meta.description')} />
+                <meta name="twitter:image" content="https://yourwebsite.com/images/preview.jpg" />
+                <link rel="icon" href="https://res.cloudinary.com/dkcoe5fam/image/upload/v1751560468/Esmail_4bdb513f9a.png" />
+                <link rel="apple-touch-icon" href="https://res.cloudinary.com/dkcoe5fam/image/upload/v1751560468/Esmail_4bdb513f9a.png" />
+                <link rel="manifest" href="https://res.cloudinary.com/dkcoe5fam/image/upload/v1751560468/Esmail_4bdb513f9a.png" />
+
+            </Head>
+
+            <div className="space-y-6 p-10">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Projects Management</h1>
+                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminProjects.pageTitle')}</h1>
                         <p className="text-gray-600 dark:text-gray-400 mt-1">
-                            Manage your portfolio projects and showcase your work
+                            {t('adminProjects.pageDescription')}
                         </p>
                     </div>
                     <Link href={route('admin.projects.create')}>
                         <Button className="flex items-center gap-2">
                             <Plus className="w-4 h-4" />
-                            Add New Project
+                            {t('adminProjects.addNewProject')}
                         </Button>
                     </Link>
                 </div>
@@ -187,7 +214,7 @@ export default function ProjectsIndex() {
                 <Card>
                     <CardHeader>
                         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                            <CardTitle className="text-lg">Search & Filter</CardTitle>
+                            <CardTitle className="text-lg">{t('adminProjects.searchFilter')}</CardTitle>
                             <Button
                                 variant="outline"
                                 size="sm"
@@ -195,7 +222,7 @@ export default function ProjectsIndex() {
                                 className="flex items-center gap-2"
                             >
                                 <Filter className="w-4 h-4" />
-                                Filters
+                                {t('adminProjects.filters')}
                             </Button>
                         </div>
                     </CardHeader>
@@ -205,7 +232,7 @@ export default function ProjectsIndex() {
                             <div className="flex-1">
                                 <Input
                                     type="text"
-                                    placeholder="Search projects by title or description..."
+                                    placeholder={t('adminProjects.searchPlaceholder')}
                                     value={data.search}
                                     onChange={(e) => setData('search', e.target.value)}
                                 />
@@ -221,16 +248,16 @@ export default function ProjectsIndex() {
                                 <Separator />
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                                     <div>
-                                        <Label className="text-sm font-medium">Category</Label>
-                                        <Select 
-                                            value={data.category} 
+                                        <Label className="text-sm font-medium">{t('adminProjects.category')}</Label>
+                                        <Select
+                                            value={data.category}
                                             onValueChange={(value) => handleFilterChange('category', value)}
                                         >
                                             <SelectTrigger>
                                                 <SelectValue />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                <SelectItem value="all">All Categories</SelectItem>
+                                                <SelectItem value="all">{t('adminProjects.allCategories')}</SelectItem>
                                                 {Object.entries(categories).map(([key, label]) => (
                                                     <SelectItem key={key} value={key}>{label}</SelectItem>
                                                 ))}
@@ -238,16 +265,16 @@ export default function ProjectsIndex() {
                                         </Select>
                                     </div>
                                     <div>
-                                        <Label className="text-sm font-medium">Status</Label>
-                                        <Select 
-                                            value={data.status} 
+                                        <Label className="text-sm font-medium">{t('adminProjects.status')}</Label>
+                                        <Select
+                                            value={data.status}
                                             onValueChange={(value) => handleFilterChange('status', value)}
                                         >
                                             <SelectTrigger>
                                                 <SelectValue />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                <SelectItem value="all">All Statuses</SelectItem>
+                                                <SelectItem value="all">{t('adminProjects.allStatuses')}</SelectItem>
                                                 {Object.entries(statuses).map(([key, label]) => (
                                                     <SelectItem key={key} value={key}>{label}</SelectItem>
                                                 ))}
@@ -260,7 +287,7 @@ export default function ProjectsIndex() {
                                             checked={data.featured}
                                             onCheckedChange={(checked) => handleFilterChange('featured', checked)}
                                         />
-                                        <Label htmlFor="featured">Featured Only</Label>
+                                        <Label htmlFor="featured">{t('adminProjects.featuredOnly')}</Label>
                                     </div>
                                     <div className="flex items-center space-x-2 pt-6">
                                         <Switch
@@ -268,7 +295,7 @@ export default function ProjectsIndex() {
                                             checked={data.is_published}
                                             onCheckedChange={(checked) => handleFilterChange('is_published', checked)}
                                         />
-                                        <Label htmlFor="published">Published Only</Label>
+                                        <Label htmlFor="published">{t('adminProjects.publishedOnly')}</Label>
                                     </div>
                                 </div>
                             </>
@@ -282,15 +309,15 @@ export default function ProjectsIndex() {
                         <CardContent className="flex flex-col items-center justify-center py-12">
                             <FolderOpen className="w-12 h-12 text-gray-400 mb-4" />
                             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                                No projects found
+                                {t('adminProjects.noProjectsFound')}
                             </h3>
                             <p className="text-gray-600 dark:text-gray-400 text-center mb-4">
-                                {Object.values(filters).some(Boolean) 
-                                    ? "No projects match your current filters. Try adjusting your search criteria."
-                                    : "Get started by creating your first project."}
+                                {Object.values(filters).some(Boolean)
+                                    ? t('adminProjects.noProjectsDescription')
+                                    : t('adminProjects.getStartedMessage')}
                             </p>
                             <Link href={route('admin.projects.create')}>
-                                <Button>Add Your First Project</Button>
+                                <Button>{t('adminProjects.addNewProject')}</Button>
                             </Link>
                         </CardContent>
                     </Card>
@@ -324,29 +351,29 @@ export default function ProjectsIndex() {
                                                 <DropdownMenuItem asChild>
                                                     <Link href={route('admin.projects.show', project.id)}>
                                                         <Eye className="w-4 h-4 mr-2" />
-                                                        View
+                                                        {t('adminProjects.view')}
                                                     </Link>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem asChild>
                                                     <Link href={route('admin.projects.edit', project.id)}>
                                                         <Edit className="w-4 h-4 mr-2" />
-                                                        Edit
+                                                        {t('adminProjects.edit')}
                                                     </Link>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem onClick={() => toggleFeatured(project)}>
                                                     <Star className={`w-4 h-4 mr-2 ${project.featured ? 'fill-yellow-400 text-yellow-400' : ''}`} />
-                                                    {project.featured ? 'Unfeature' : 'Feature'}
+                                                    {project.featured ? t('adminProjects.unfeature') : t('adminProjects.feature')}
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem onClick={() => togglePublished(project)}>
                                                     {project.is_published ? <EyeOff className="w-4 h-4 mr-2" /> : <Eye className="w-4 h-4 mr-2" />}
-                                                    {project.is_published ? 'Unpublish' : 'Publish'}
+                                                    {project.is_published ? t('adminProjects.unpublish') : t('adminProjects.publish')}
                                                 </DropdownMenuItem>
-                                                <DropdownMenuItem 
+                                                <DropdownMenuItem
                                                     onClick={() => deleteProject(project)}
                                                     className="text-red-600"
                                                 >
                                                     <Trash2 className="w-4 h-4 mr-2" />
-                                                    Delete
+                                                    {t('adminProjects.delete')}
                                                 </DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
@@ -360,15 +387,15 @@ export default function ProjectsIndex() {
                                     {/* Performance Scores */}
                                     <div className="grid grid-cols-3 gap-2 text-center">
                                         <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-2">
-                                            <div className="text-xs text-gray-600 dark:text-gray-400">Performance</div>
+                                            <div className="text-xs text-gray-600 dark:text-gray-400">{t('adminProjects.performance')}</div>
                                             <div className="text-sm font-semibold">{project.performance_score}/100</div>
                                         </div>
                                         <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-2">
-                                            <div className="text-xs text-gray-600 dark:text-gray-400">Responsive</div>
+                                            <div className="text-xs text-gray-600 dark:text-gray-400">{t('adminProjects.responsive')}</div>
                                             <div className="text-sm font-semibold">{project.responsive_score}/100</div>
                                         </div>
                                         <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-2">
-                                            <div className="text-xs text-gray-600 dark:text-gray-400">A11y</div>
+                                            <div className="text-xs text-gray-600 dark:text-gray-400">{t('adminProjects.accessibility')}</div>
                                             <div className="text-sm font-semibold">{project.accessibility_score}/100</div>
                                         </div>
                                     </div>
@@ -405,7 +432,7 @@ export default function ProjectsIndex() {
                                             <Button size="sm" variant="outline" asChild>
                                                 <a href={project.demo_url} target="_blank" rel="noopener noreferrer">
                                                     <Globe className="w-3 h-3 mr-1" />
-                                                    Demo
+                                                    {t('adminProjects.liveDemo')}
                                                 </a>
                                             </Button>
                                         )}
@@ -413,7 +440,7 @@ export default function ProjectsIndex() {
                                             <Button size="sm" variant="outline" asChild>
                                                 <a href={project.github_url} target="_blank" rel="noopener noreferrer">
                                                     <Github className="w-3 h-3 mr-1" />
-                                                    Code
+                                                    {t('adminProjects.sourceCode')}
                                                 </a>
                                             </Button>
                                         )}
@@ -421,7 +448,7 @@ export default function ProjectsIndex() {
                                             <Button size="sm" variant="outline" asChild>
                                                 <a href={project.website_url} target="_blank" rel="noopener noreferrer">
                                                     <ExternalLink className="w-3 h-3 mr-1" />
-                                                    Site
+                                                    {t('adminProjects.website')}
                                                 </a>
                                             </Button>
                                         )}
@@ -432,7 +459,7 @@ export default function ProjectsIndex() {
                                         <div className="flex items-center gap-1">
                                             <Star className={`w-4 h-4 ${project.featured ? 'fill-yellow-400 text-yellow-400' : 'text-gray-400'}`} />
                                             <span className="text-xs text-gray-600 dark:text-gray-400">
-                                                {project.featured ? 'Featured' : 'Regular'}
+                                                {project.featured ? t('adminProjects.featured') : t('adminProjects.regular')}
                                             </span>
                                         </div>
                                         <div className="flex items-center gap-1">
@@ -442,12 +469,12 @@ export default function ProjectsIndex() {
                                                 <EyeOff className="w-4 h-4 text-gray-400" />
                                             )}
                                             <span className="text-xs text-gray-600 dark:text-gray-400">
-                                                {project.is_published ? 'Published' : 'Draft'}
+                                                {project.is_published ? t('adminProjects.published') : t('adminProjects.draft')}
                                             </span>
                                         </div>
                                         <div className="ml-auto">
                                             <span className="text-xs text-gray-400">
-                                                Priority: {project.priority}
+                                                {t('adminProjects.priority')}: {project.priority}
                                             </span>
                                         </div>
                                     </div>

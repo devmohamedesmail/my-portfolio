@@ -6,6 +6,7 @@ use App\Models\Project;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Cloudinary\Cloudinary;
 
 class ProjectController extends Controller
 {
@@ -98,7 +99,7 @@ class ProjectController extends Controller
             'demo_url' => 'nullable|url',
             'github_url' => 'nullable|url',
             'website_url' => 'nullable|url',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|max:2048', // 2MB max
             'gallery' => 'nullable|array',
             'icon' => 'nullable|string',
             'technologies' => 'nullable|array',
@@ -116,6 +117,23 @@ class ProjectController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
         ]);
+
+        // Upload image to cloudinary
+        if ($request->hasFile('image')) {
+            $cloudinary = new Cloudinary([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key' => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+            ]);
+
+            $uploaded = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
+                'folder' => 'projects',
+            ]);
+
+            $validated['image'] = $uploaded['secure_url'];
+        }
 
         Project::create($validated);
 
@@ -162,7 +180,7 @@ class ProjectController extends Controller
             'demo_url' => 'nullable|url',
             'github_url' => 'nullable|url',
             'website_url' => 'nullable|url',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|max:2048', // 2MB max
             'gallery' => 'nullable|array',
             'icon' => 'nullable|string',
             'technologies' => 'nullable|array',
@@ -180,6 +198,23 @@ class ProjectController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
         ]);
+
+        // Upload image to cloudinary if new image is provided
+        if ($request->hasFile('image')) {
+            $cloudinary = new Cloudinary([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key' => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+            ]);
+
+            $uploaded = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
+                'folder' => 'projects',
+            ]);
+
+            $validated['image'] = $uploaded['secure_url'];
+        }
 
         $project->update($validated);
 

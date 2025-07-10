@@ -1,4 +1,5 @@
 import { Head, Link, router } from '@inertiajs/react'
+import { useTranslation } from 'react-i18next'
 import AppLayout from '@/layouts/app-layout'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -52,8 +53,10 @@ interface Props {
 }
 
 export default function ShowProject({ project }: Props) {
+    const { t } = useTranslation();
+    
     const handleDelete = () => {
-        if (confirm('Are you sure you want to delete this project?')) {
+        if (confirm(t('adminProjects.deleteConfirmation'))) {
             router.delete(route('admin.projects.destroy', project.id))
         }
     }
@@ -90,7 +93,7 @@ export default function ShowProject({ project }: Props) {
         <AppLayout>
             <Head title={project.title} />
             
-            <div className="space-y-6 px-1">
+            <div className="space-y-6 p-10">
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div className="space-y-1">
@@ -100,12 +103,12 @@ export default function ShowProject({ project }: Props) {
                             {project.featured && (
                                 <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
                                     <Star className="h-3 w-3 mr-1" />
-                                    Featured
+                                    {t('adminProjects.featured')}
                                 </Badge>
                             )}
                             {!project.is_published && (
                                 <Badge variant="destructive">
-                                    Draft
+                                    {t('adminProjects.draft')}
                                 </Badge>
                             )}
                         </div>
@@ -115,12 +118,12 @@ export default function ShowProject({ project }: Props) {
                         <Link href={route('admin.projects.edit', project.id)}>
                             <Button size="sm">
                                 <Edit className="h-4 w-4 mr-2" />
-                                Edit
+                                {t('adminProjects.edit')}
                             </Button>
                         </Link>
                         <Button size="sm" variant="destructive" onClick={handleDelete}>
                             <Trash2 className="h-4 w-4 mr-2" />
-                            Delete
+                            {t('adminProjects.delete')}
                         </Button>
                     </div>
                 </div>
@@ -132,7 +135,7 @@ export default function ShowProject({ project }: Props) {
                         {project.content && (
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Description</CardTitle>
+                                    <CardTitle>{t('adminProjects.projectDescription')}</CardTitle>
                                 </CardHeader>
                                 <CardContent>
                                     <div className="prose dark:prose-invert max-w-none">
@@ -146,7 +149,7 @@ export default function ShowProject({ project }: Props) {
                         {project.technologies && project.technologies.length > 0 && (
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Technologies Used</CardTitle>
+                                    <CardTitle>{t('adminProjects.technologiesUsed')}</CardTitle>
                                 </CardHeader>
                                 <CardContent>
                                     <div className="flex flex-wrap gap-2">
@@ -164,7 +167,7 @@ export default function ShowProject({ project }: Props) {
                         {(project.demo_url || project.github_url || project.website_url) && (
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Project Links</CardTitle>
+                                    <CardTitle>{t('adminProjects.links')}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="space-y-3">
                                     {project.demo_url && (
@@ -176,7 +179,7 @@ export default function ShowProject({ project }: Props) {
                                                 rel="noopener noreferrer"
                                                 className="text-blue-600 hover:underline dark:text-blue-400"
                                             >
-                                                Live Demo
+                                                {t('adminProjects.liveDemo')}
                                                 <ExternalLink className="h-3 w-3 ml-1 inline" />
                                             </a>
                                         </div>
@@ -190,7 +193,7 @@ export default function ShowProject({ project }: Props) {
                                                 rel="noopener noreferrer"
                                                 className="text-blue-600 hover:underline dark:text-blue-400"
                                             >
-                                                Source Code
+                                                {t('adminProjects.sourceCode')}
                                                 <ExternalLink className="h-3 w-3 ml-1 inline" />
                                             </a>
                                         </div>
@@ -204,7 +207,7 @@ export default function ShowProject({ project }: Props) {
                                                 rel="noopener noreferrer"
                                                 className="text-blue-600 hover:underline dark:text-blue-400"
                                             >
-                                                Website
+                                                {t('adminProjects.website')}
                                                 <ExternalLink className="h-3 w-3 ml-1 inline" />
                                             </a>
                                         </div>
@@ -216,9 +219,9 @@ export default function ShowProject({ project }: Props) {
                         {/* Performance Scores */}
                         <Card>
                             <CardHeader>
-                                <CardTitle>Performance Metrics</CardTitle>
+                                <CardTitle>{t('adminProjects.performanceScores')}</CardTitle>
                                 <CardDescription>
-                                    Project performance and quality scores
+                                    {t('adminProjects.performanceScoresDesc')}
                                 </CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4">
@@ -226,7 +229,7 @@ export default function ShowProject({ project }: Props) {
                                     <div className="text-center">
                                         <div className="flex items-center justify-center mb-2">
                                             <TrendingUp className="h-5 w-5 text-muted-foreground mr-1" />
-                                            <span className="text-sm font-medium">Performance</span>
+                                            <span className="text-sm font-medium">{t('adminProjects.performance')}</span>
                                         </div>
                                         <div className={`text-2xl font-bold ${getScoreColor(project.performance_score)}`}>
                                             {project.performance_score}%
@@ -235,7 +238,7 @@ export default function ShowProject({ project }: Props) {
                                     <div className="text-center">
                                         <div className="flex items-center justify-center mb-2">
                                             <Smartphone className="h-5 w-5 text-muted-foreground mr-1" />
-                                            <span className="text-sm font-medium">Responsive</span>
+                                            <span className="text-sm font-medium">{t('adminProjects.responsive')}</span>
                                         </div>
                                         <div className={`text-2xl font-bold ${getScoreColor(project.responsive_score)}`}>
                                             {project.responsive_score}%
@@ -244,7 +247,7 @@ export default function ShowProject({ project }: Props) {
                                     <div className="text-center">
                                         <div className="flex items-center justify-center mb-2">
                                             <Accessibility className="h-5 w-5 text-muted-foreground mr-1" />
-                                            <span className="text-sm font-medium">Accessibility</span>
+                                            <span className="text-sm font-medium">{t('adminProjects.accessibility')}</span>
                                         </div>
                                         <div className={`text-2xl font-bold ${getScoreColor(project.accessibility_score)}`}>
                                             {project.accessibility_score}%
@@ -260,11 +263,11 @@ export default function ShowProject({ project }: Props) {
                         {/* Project Details */}
                         <Card>
                             <CardHeader>
-                                <CardTitle>Project Details</CardTitle>
+                                <CardTitle>{t('adminProjects.projectDetails')}</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
                                 <div className="space-y-2">
-                                    <span className="text-sm font-medium text-muted-foreground">Category</span>
+                                    <span className="text-sm font-medium text-muted-foreground">{t('adminProjects.category')}</span>
                                     <div>
                                         <Badge className={getCategoryColor(project.category)}>
                                             {project.category.replace('-', ' ').toUpperCase()}
@@ -272,7 +275,7 @@ export default function ShowProject({ project }: Props) {
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <span className="text-sm font-medium text-muted-foreground">Status</span>
+                                    <span className="text-sm font-medium text-muted-foreground">{t('adminProjects.status')}</span>
                                     <div>
                                         <Badge className={getStatusColor(project.status)}>
                                             {project.status.replace('-', ' ').toUpperCase()}
@@ -280,11 +283,11 @@ export default function ShowProject({ project }: Props) {
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <span className="text-sm font-medium text-muted-foreground">Priority</span>
+                                    <span className="text-sm font-medium text-muted-foreground">{t('adminProjects.priority')}</span>
                                     <div className="text-sm">{project.priority}</div>
                                 </div>
                                 <div className="space-y-2">
-                                    <span className="text-sm font-medium text-muted-foreground">Slug</span>
+                                    <span className="text-sm font-medium text-muted-foreground">{t('adminProjects.slug')}</span>
                                     <div className="text-sm font-mono bg-muted px-2 py-1 rounded">
                                         {project.slug}
                                     </div>
@@ -296,14 +299,14 @@ export default function ShowProject({ project }: Props) {
                         {(project.start_date || project.end_date || project.duration_months) && (
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Timeline</CardTitle>
+                                    <CardTitle>{t('adminProjects.timeline')}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
                                     {project.start_date && (
                                         <div className="flex items-center gap-2">
                                             <Calendar className="h-4 w-4 text-muted-foreground" />
                                             <div>
-                                                <div className="text-sm font-medium">Start Date</div>
+                                                <div className="text-sm font-medium">{t('adminProjects.startDate')}</div>
                                                 <div className="text-sm text-muted-foreground">
                                                     {new Date(project.start_date).toLocaleDateString()}
                                                 </div>
@@ -314,7 +317,7 @@ export default function ShowProject({ project }: Props) {
                                         <div className="flex items-center gap-2">
                                             <Calendar className="h-4 w-4 text-muted-foreground" />
                                             <div>
-                                                <div className="text-sm font-medium">End Date</div>
+                                                <div className="text-sm font-medium">{t('adminProjects.endDate')}</div>
                                                 <div className="text-sm text-muted-foreground">
                                                     {new Date(project.end_date).toLocaleDateString()}
                                                 </div>
@@ -325,7 +328,7 @@ export default function ShowProject({ project }: Props) {
                                         <div className="flex items-center gap-2">
                                             <Clock className="h-4 w-4 text-muted-foreground" />
                                             <div>
-                                                <div className="text-sm font-medium">Duration</div>
+                                                <div className="text-sm font-medium">{t('adminProjects.durationMonths')}</div>
                                                 <div className="text-sm text-muted-foreground">
                                                     {project.duration_months} month{project.duration_months !== 1 ? 's' : ''}
                                                 </div>
@@ -340,18 +343,18 @@ export default function ShowProject({ project }: Props) {
                         {(project.meta_title || project.meta_description) && (
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>SEO Information</CardTitle>
+                                    <CardTitle>{t('adminProjects.seo')}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
                                     {project.meta_title && (
                                         <div className="space-y-2">
-                                            <span className="text-sm font-medium text-muted-foreground">Meta Title</span>
+                                            <span className="text-sm font-medium text-muted-foreground">{t('adminProjects.metaTitle')}</span>
                                             <div className="text-sm">{project.meta_title}</div>
                                         </div>
                                     )}
                                     {project.meta_description && (
                                         <div className="space-y-2">
-                                            <span className="text-sm font-medium text-muted-foreground">Meta Description</span>
+                                            <span className="text-sm font-medium text-muted-foreground">{t('adminProjects.metaDescription')}</span>
                                             <div className="text-sm text-muted-foreground">{project.meta_description}</div>
                                         </div>
                                     )}
@@ -362,17 +365,17 @@ export default function ShowProject({ project }: Props) {
                         {/* Metadata */}
                         <Card>
                             <CardHeader>
-                                <CardTitle>Metadata</CardTitle>
+                                <CardTitle>{t('common.metadata')}</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
                                 <div className="space-y-2">
-                                    <span className="text-sm font-medium text-muted-foreground">Created</span>
+                                    <span className="text-sm font-medium text-muted-foreground">{t('common.createdAt')}</span>
                                     <div className="text-sm">
                                         {new Date(project.created_at).toLocaleDateString()}
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <span className="text-sm font-medium text-muted-foreground">Last Updated</span>
+                                    <span className="text-sm font-medium text-muted-foreground">{t('common.updatedAt')}</span>
                                     <div className="text-sm">
                                         {new Date(project.updated_at).toLocaleDateString()}
                                     </div>

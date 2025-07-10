@@ -11,7 +11,7 @@ class UpdateClientRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class UpdateClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'service' => 'required|string|max:255',
+            'service_start_date' => 'required|date',
+            'service_end_date' => 'required|date|after_or_equal:service_start_date',
+            'budget' => 'nullable|numeric|min:0',
+            'description' => 'nullable|string',
+            'status' => 'required|in:active,inactive,completed',
         ];
     }
 }

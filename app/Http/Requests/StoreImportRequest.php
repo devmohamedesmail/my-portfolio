@@ -11,7 +11,7 @@ class StoreImportRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class StoreImportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'type' => 'required|in:credential,file,document,other',
+            'content' => 'nullable|string',
+            'file' => 'nullable|file|max:10240', // 10MB max
+            'metadata' => 'nullable|array',
         ];
     }
 }

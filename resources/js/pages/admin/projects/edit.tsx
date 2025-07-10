@@ -48,7 +48,7 @@ interface EditProjectProps {
 
 export default function EditProject({ project, categories, statuses }: EditProjectProps) {
     const { t } = useTranslation();
-    const { data, setData, put, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         title: project.title || '',
         slug: project.slug || '',
         description: project.description || '',
@@ -56,7 +56,8 @@ export default function EditProject({ project, categories, statuses }: EditProje
         demo_url: project.demo_url || '',
         github_url: project.github_url || '',
         website_url: project.website_url || '',
-        image: project.image || '',
+        image: null as File | null,
+        current_image: project.image || '',
         gallery: project.gallery || [],
         icon: project.icon || '',
         technologies: project.technologies || [],
@@ -73,11 +74,14 @@ export default function EditProject({ project, categories, statuses }: EditProje
         is_published: project.is_published as boolean,
         meta_title: project.meta_title || '',
         meta_description: project.meta_description || '',
+        _method: 'PUT',
     })
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        put(route('admin.projects.update', project.id))
+        post(route('admin.projects.update', project.id), {
+            forceFormData: true,
+        })
     }
 
     const generateSlug = (title: string) => {
@@ -409,14 +413,20 @@ export default function EditProject({ project, categories, statuses }: EditProje
                                 <CardContent className="space-y-4">
                                     <div>
                                         <Label htmlFor="image">{t('adminProjects.featuredImageUrl')}</Label>
+                                        {data.current_image && (
+                                            <div className="mb-2">
+                                                <img src={data.current_image} alt="Current image" className="w-32 h-32 object-cover rounded" />
+                                                <p className="text-sm text-gray-600 mt-1">Current image</p>
+                                            </div>
+                                        )}
                                         <Input
                                             id="image"
-                                            type="url"
-                                            value={data.image}
-                                            onChange={(e) => setData('image', e.target.value)}
-                                            placeholder={t('adminProjects.featuredImagePlaceholder')}
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={(e) => setData('image', e.target.files ? e.target.files[0] : null)}
                                             className={errors.image ? 'border-red-500' : ''}
                                         />
+                                        <p className="text-sm text-gray-600 mt-1">Choose a new image to replace the current one</p>
                                         {errors.image && (
                                             <p className="text-sm text-red-500 mt-1">{errors.image}</p>
                                         )}
@@ -426,7 +436,7 @@ export default function EditProject({ project, categories, statuses }: EditProje
                                         <Label htmlFor="icon">{t('adminProjects.iconUrl')}</Label>
                                         <Input
                                             id="icon"
-                                            type="url"
+                                            type="text"
                                             value={data.icon}
                                             onChange={(e) => setData('icon', e.target.value)}
                                             placeholder={t('adminProjects.iconUrlPlaceholder')}

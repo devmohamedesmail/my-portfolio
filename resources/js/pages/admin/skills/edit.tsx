@@ -12,6 +12,7 @@ import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
 import { BreadcrumbItem } from '@/types';
 
+
 interface Skill {
     id: number;
     name: string;
@@ -49,11 +50,11 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
         { title: t('sidebar.skills'), href: '/admin/skills' },
         { title: t('adminSkills.editSkill'), href: '#' },
     ];
-    const { data, setData, put, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         name: skill.name || '',
         description: skill.description || '',
         icon: skill.icon || '',
-        image: skill.image || '',
+        image: null as File | null,
         color: skill.color || '#3B82F6',
         background_gradient: skill.background_gradient || 'from-blue-400 to-blue-600',
         level: skill.level || 0,
@@ -67,24 +68,19 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
         first_learned: skill.first_learned || '',
         last_used: skill.last_used || '',
         certification_url: skill.certification_url || '',
+        _method: 'PUT' as string,
     });
 
-   
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log('Submitting skill data:', data);
-        put(route('admin.skills.update', skill.id), {
-            onSuccess: () => {
 
-                console.log('Skill updated successfully');
-            },
-            onError: (errors) => {
-
-                console.log(errors);
-            },
+        post(route('admin.skills.update', skill.id), {
+            forceFormData: true,
         });
     };
-    
+
 
     const gradientOptions = [
         { value: 'from-blue-400 to-blue-600', label: 'Blue', preview: 'bg-gradient-to-r from-blue-400 to-blue-600' },
@@ -105,21 +101,47 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title={`Edit ${skill.name}`} />
+            <Head title={`${t('adminSkills.editSkill')} - ${skill.name}`} >
+                <title>{t('meta.title')}</title>
+                <meta name="description" content={t('meta.description')} />
+                <meta name="keywords" content={t('meta.keywords')} />
+                <meta httpEquiv="Content-Language" content="ar" />
+                <meta name="robots" content="index, follow" />
+                <meta name="author" content="Mohamed Esmail" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="subject" content={t('meta.subject')} />
+                <meta property="og:title" content={t('meta.title')} />
+                <meta property="og:description" content={t('meta.description')} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://yourwebsite.com" />
+                <meta property="og:image" content="https://yourwebsite.com/images/preview.jpg" />
+                <meta property="og:locale" content="ar_AR" />
 
-            <div className="max-w-4xl space-y-6 px-10">
+                {/* تحسينات تويتر */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={t('meta.title')} />
+                <meta name="twitter:description" content={t('meta.description')} />
+                <meta name="twitter:image" content="https://yourwebsite.com/images/preview.jpg" />
+                <link rel="icon" href="https://res.cloudinary.com/dkcoe5fam/image/upload/v1751560468/Esmail_4bdb513f9a.png" />
+                <link rel="apple-touch-icon" href="https://res.cloudinary.com/dkcoe5fam/image/upload/v1751560468/Esmail_4bdb513f9a.png" />
+                <link rel="manifest" href="https://res.cloudinary.com/dkcoe5fam/image/upload/v1751560468/Esmail_4bdb513f9a.png" />
+
+            </Head>
+
+            <div className=" space-y-6 p-10">
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Edit Skill</h1>
+                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSkills.editSkill')}</h1>
                         <p className="text-gray-600 dark:text-gray-400 mt-1">
-                            Update information for "{skill.name}"
+                            {t('adminSkills.updateTechnicalSkill')} "{skill.name}"
                         </p>
                     </div>
                     <Link href={route('admin.skills.index')}>
                         <Button variant="outline" className="flex items-center gap-2">
                             <ArrowLeft className="w-4 h-4" />
-                            Back to Skills
+                            {t('adminSkills.backToSkills')}
                         </Button>
                     </Link>
                 </div>
@@ -128,21 +150,21 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                     {/* Basic Information */}
                     <Card>
                         <CardHeader>
-                            <CardTitle>Basic Information</CardTitle>
+                            <CardTitle>{t('adminSkills.basicInformation')}</CardTitle>
                             <CardDescription>
-                                Essential details about your skill
+                                {t('adminSkills.basicInformationDesc')}
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <Label htmlFor="name">Name *</Label>
+                                    <Label htmlFor="name">{t('adminSkills.name')} *</Label>
                                     <Input
                                         id="name"
                                         type="text"
                                         value={data.name}
                                         onChange={(e) => setData('name', e.target.value)}
-                                        placeholder="e.g., React, Laravel, Docker"
+                                        placeholder={t('adminSkills.namePlaceholder')}
                                         className={errors.name ? 'border-red-500' : ''}
                                     />
                                     {errors.name && (
@@ -150,7 +172,7 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                                     )}
                                 </div>
                                 <div>
-                                    <Label htmlFor="category">Category *</Label>
+                                    <Label htmlFor="category">{t('adminSkills.category')} *</Label>
                                     <Select value={data.category} onValueChange={(value) => setData('category', value)}>
                                         <SelectTrigger className={errors.category ? 'border-red-500' : ''}>
                                             <SelectValue />
@@ -168,12 +190,12 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                             </div>
 
                             <div>
-                                <Label htmlFor="description">Description</Label>
+                                <Label htmlFor="description">{t('adminSkills.description')}</Label>
                                 <Textarea
                                     id="description"
                                     value={data.description}
                                     onChange={(e) => setData('description', e.target.value)}
-                                    placeholder="Brief description of the skill and how you use it..."
+                                    placeholder={t('adminSkills.descriptionPlaceholder')}
                                     rows={3}
                                     className={errors.description ? 'border-red-500' : ''}
                                 />
@@ -187,22 +209,22 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                     {/* Visual Elements */}
                     <Card>
                         <CardHeader>
-                            <CardTitle>Visual Elements</CardTitle>
+                            <CardTitle>{t('adminSkills.visualElements')}</CardTitle>
                             <CardDescription>
-                                Customize the appearance of your skill card
+                                {t('adminSkills.visualElementsDesc')}
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <Label htmlFor="icon">Icon</Label>
+                                    <Label htmlFor="icon">{t('adminSkills.icon')}</Label>
                                     <div className="space-y-2">
                                         <Input
                                             id="icon"
                                             type="text"
                                             value={data.icon}
                                             onChange={(e) => setData('icon', e.target.value)}
-                                            placeholder="Choose an emoji"
+                                            placeholder={t('adminSkills.iconPlaceholder')}
                                             className={errors.icon ? 'border-red-500' : ''}
                                         />
                                         <div className="flex flex-wrap gap-1">
@@ -225,7 +247,7 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                                     )}
                                 </div>
                                 <div>
-                                    <Label htmlFor="color">Color</Label>
+                                    <Label htmlFor="color">{t('adminSkills.color')}</Label>
                                     <Input
                                         id="color"
                                         type="color"
@@ -236,13 +258,13 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                                 </div>
 
                                 <div>
-                                    <Label htmlFor="image">Image Upload</Label>
+                                    <Label htmlFor="image">{t('adminSkills.imageUpload')}</Label>
                                     <Input
                                         id="image"
                                         type="file"
                                         onChange={(e) => {
                                             const file = e.target.files?.[0];
-                                            setData('image', file || '');
+                                            setData('image', file || null);
                                         }}
 
 
@@ -254,7 +276,7 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                             </div>
 
                             <div>
-                                <Label>Background Gradient</Label>
+                                <Label>{t('adminSkills.backgroundGradient')}</Label>
                                 <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mt-2">
                                     {gradientOptions.map((gradient) => (
                                         <Button
@@ -274,7 +296,7 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
 
                             {/* Preview */}
                             <div>
-                                <Label>Preview</Label>
+                                <Label>{t('adminSkills.preview')}</Label>
                                 <div className="mt-2 p-4 border rounded-lg">
                                     <div className="flex items-center gap-3">
                                         <div
@@ -295,15 +317,15 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                     {/* Skill Level & Experience */}
                     <Card>
                         <CardHeader>
-                            <CardTitle>Skill Level & Experience</CardTitle>
+                            <CardTitle>{t('adminSkills.skillLevelExperience')}</CardTitle>
                             <CardDescription>
-                                Define your proficiency and experience with this skill
+                                {t('adminSkills.skillLevelExperienceDesc')}
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div>
-                                    <Label htmlFor="level">Proficiency Level (0-100) *</Label>
+                                    <Label htmlFor="level">{t('adminSkills.proficiencyLevel')} *</Label>
                                     <Input
                                         id="level"
                                         type="number"
@@ -324,7 +346,7 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                                     )}
                                 </div>
                                 <div>
-                                    <Label htmlFor="mastery_level">Mastery Level *</Label>
+                                    <Label htmlFor="mastery_level">{t('adminSkills.masteryLevel')} *</Label>
                                     <Select value={data.mastery_level} onValueChange={(value) => setData('mastery_level', value)}>
                                         <SelectTrigger className={errors.mastery_level ? 'border-red-500' : ''}>
                                             <SelectValue />
@@ -340,7 +362,7 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                                     )}
                                 </div>
                                 <div>
-                                    <Label htmlFor="years_experience">Years of Experience *</Label>
+                                    <Label htmlFor="years_experience">{t('adminSkills.yearsExperience')} *</Label>
                                     <Input
                                         id="years_experience"
                                         type="number"
@@ -361,15 +383,15 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                     {/* Additional Settings */}
                     <Card>
                         <CardHeader>
-                            <CardTitle>Additional Settings</CardTitle>
+                            <CardTitle>{t('adminSkills.additionalSettings')}</CardTitle>
                             <CardDescription>
-                                Configure display and management settings
+                                {t('adminSkills.additionalSettingsDesc')}
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <Label htmlFor="type">Type *</Label>
+                                    <Label htmlFor="type">{t('adminSkills.type')} *</Label>
                                     <Select value={data.type} onValueChange={(value) => setData('type', value)}>
                                         <SelectTrigger className={errors.type ? 'border-red-500' : ''}>
                                             <SelectValue />
@@ -385,7 +407,7 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                                     )}
                                 </div>
                                 <div>
-                                    <Label htmlFor="priority">Priority (0-100) *</Label>
+                                    <Label htmlFor="priority">{t('adminSkills.priorityLevel')} *</Label>
                                     <Input
                                         id="priority"
                                         type="number"
@@ -403,7 +425,7 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <Label htmlFor="first_learned">First Learned</Label>
+                                    <Label htmlFor="first_learned">{t('adminSkills.firstLearned')}</Label>
                                     <Input
                                         id="first_learned"
                                         type="date"
@@ -416,7 +438,7 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                                     )}
                                 </div>
                                 <div>
-                                    <Label htmlFor="last_used">Last Used</Label>
+                                    <Label htmlFor="last_used">{t('adminSkills.lastUsed')}</Label>
                                     <Input
                                         id="last_used"
                                         type="date"
@@ -431,13 +453,13 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                             </div>
 
                             <div>
-                                <Label htmlFor="certification_url">Certification URL</Label>
+                                <Label htmlFor="certification_url">{t('adminSkills.certificationUrl')}</Label>
                                 <Input
                                     id="certification_url"
                                     type="url"
                                     value={data.certification_url}
                                     onChange={(e) => setData('certification_url', e.target.value)}
-                                    placeholder="https://example.com/certificate"
+                                    placeholder={t('adminSkills.certificationUrlPlaceholder')}
                                     className={errors.certification_url ? 'border-red-500' : ''}
                                 />
                                 {errors.certification_url && (
@@ -454,7 +476,7 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                                         checked={data.featured}
                                         onCheckedChange={(checked) => setData('featured', checked as boolean)}
                                     />
-                                    <Label htmlFor="featured">Featured on homepage</Label>
+                                    <Label htmlFor="featured">{t('adminSkills.featuredHomepage')}</Label>
                                 </div>
                                 <div className="flex items-center space-x-2">
                                     <Switch
@@ -462,7 +484,7 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                                         checked={data.active}
                                         onCheckedChange={(checked) => setData('active', checked as boolean)}
                                     />
-                                    <Label htmlFor="active">Active and visible</Label>
+                                    <Label htmlFor="active">{t('adminSkills.activeVisible')}</Label>
                                 </div>
                             </div>
                         </CardContent>
@@ -473,12 +495,12 @@ export default function EditSkill({ skill, categories, types, masteryLevels }: E
                         <Link href={route('admin.skills.index')}>
                             <Button type="button" variant="outline">
                                 <X className="w-4 h-4 mr-2" />
-                                Cancel
+                                {t('adminSkills.cancel')}
                             </Button>
                         </Link>
                         <Button type="submit" disabled={processing}>
                             <Save className="w-4 h-4 mr-2" />
-                            {processing ? 'Updating...' : 'Update Skill'}
+                            {processing ? t('adminSkills.updating') : t('adminSkills.updateSkill')}
                         </Button>
                     </div>
                 </form>

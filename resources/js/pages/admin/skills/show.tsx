@@ -79,9 +79,35 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title={skill.name} />
+            <Head title={skill.name} >
+                 <title>{t('meta.title')}</title>
+                <meta name="description" content={t('meta.description')} />
+                <meta name="keywords" content={t('meta.keywords')} />
+                <meta httpEquiv="Content-Language" content="ar" />
+                <meta name="robots" content="index, follow" />
+                <meta name="author" content="Mohamed Esmail" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="subject" content={t('meta.subject')} />
+                <meta property="og:title" content={t('meta.title')} />
+                <meta property="og:description" content={t('meta.description')} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://yourwebsite.com" />
+                <meta property="og:image" content="https://yourwebsite.com/images/preview.jpg" />
+                <meta property="og:locale" content="ar_AR" />
 
-            <div className="max-w-4xl space-y-6 px-10">
+                {/* تحسينات تويتر */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={t('meta.title')} />
+                <meta name="twitter:description" content={t('meta.description')} />
+                <meta name="twitter:image" content="https://yourwebsite.com/images/preview.jpg" />
+                <link rel="icon" href="https://res.cloudinary.com/dkcoe5fam/image/upload/v1751560468/Esmail_4bdb513f9a.png" />
+                <link rel="apple-touch-icon" href="https://res.cloudinary.com/dkcoe5fam/image/upload/v1751560468/Esmail_4bdb513f9a.png" />
+                <link rel="manifest" href="https://res.cloudinary.com/dkcoe5fam/image/upload/v1751560468/Esmail_4bdb513f9a.png" />
+
+            </Head>
+
+            <div className=" space-y-6 p-10">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
@@ -101,7 +127,7 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                         <Link href={route('admin.skills.index')}>
                             <Button variant="outline" className="flex items-center gap-2">
                                 <ArrowLeft className="w-4 h-4" />
-                                Back
+                                {t('adminSkills.backToSkills')}
                             </Button>
                         </Link>
                         <Link href={route('admin.skills.edit', skill.id)}>
@@ -118,7 +144,7 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                     <Alert className="border-orange-200 bg-orange-50">
                         <EyeOff className="h-4 w-4" />
                         <AlertDescription>
-                            This skill is currently inactive and won't be displayed publicly.
+                            {t('adminSkills.inactiveWarning')}
                         </AlertDescription>
                     </Alert>
                 )}
@@ -143,13 +169,13 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                         {/* Proficiency */}
                         <Card>
                             <CardHeader>
-                                <CardTitle>Proficiency & Experience</CardTitle>
+                                <CardTitle>{t('adminSkills.proficiencyExperience')}</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-6">
                                 {/* Progress Bar */}
                                 <div>
                                     <div className="flex justify-between items-center mb-2">
-                                        <span className="text-sm font-medium">Skill Level</span>
+                                        <span className="text-sm font-medium">{t('adminSkills.level')}</span>
                                         <span className="text-sm text-gray-600 dark:text-gray-400">{skill.level}%</span>
                                     </div>
                                     <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
@@ -167,7 +193,7 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                                             {skill.years_experience}
                                         </div>
                                         <div className="text-sm text-gray-600 dark:text-gray-400">
-                                            Year{skill.years_experience !== 1 ? 's' : ''} Experience
+                                            {t('adminSkills.yearsOfExperience')}
                                         </div>
                                     </div>
                                     <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
@@ -175,7 +201,7 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                                             {skill.level}%
                                         </div>
                                         <div className="text-sm text-gray-600 dark:text-gray-400">
-                                            Proficiency
+                                            {t('adminSkills.proficiencyLevel')}
                                         </div>
                                     </div>
                                     <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
@@ -183,14 +209,14 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                                             {skill.priority}
                                         </div>
                                         <div className="text-sm text-gray-600 dark:text-gray-400">
-                                            Priority
+                                            {t('adminSkills.priority')}
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Mastery Level */}
                                 <div>
-                                    <Label className="text-sm font-medium mb-2 block">Mastery Level</Label>
+                                    <Label className="text-sm font-medium mb-2 block">{t('adminSkills.masteryLevel')}</Label>
                                     <Badge className={`${getMasteryColor(skill.mastery_level)} text-base px-3 py-1`}>
                                         {skill.mastery_level.charAt(0).toUpperCase() + skill.mastery_level.slice(1)}
                                     </Badge>
@@ -201,14 +227,14 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                         {/* Dates & Timeline */}
                         <Card>
                             <CardHeader>
-                                <CardTitle>Timeline</CardTitle>
+                                <CardTitle>{t('adminSkills.dates')}</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div className="flex items-center gap-3">
                                         <Calendar className="w-5 h-5 text-green-500" />
                                         <div>
-                                            <div className="text-sm font-medium">First Learned</div>
+                                            <div className="text-sm font-medium">{t('adminSkills.firstLearned')}</div>
                                             <div className="text-sm text-gray-600 dark:text-gray-400">
                                                 {formatDate(skill.first_learned)}
                                             </div>
@@ -217,7 +243,7 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                                     <div className="flex items-center gap-3">
                                         <Clock className="w-5 h-5 text-blue-500" />
                                         <div>
-                                            <div className="text-sm font-medium">Last Used</div>
+                                            <div className="text-sm font-medium">{t('adminSkills.lastUsed')}</div>
                                             <div className="text-sm text-gray-600 dark:text-gray-400">
                                                 {formatDate(skill.last_used)}
                                             </div>
@@ -231,7 +257,7 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                         {skill.certification_url && (
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Certification</CardTitle>
+                                    <CardTitle>{t('adminSkills.certification')}</CardTitle>
                                 </CardHeader>
                                 <CardContent>
                                     <a
@@ -241,7 +267,7 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                                         className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
                                     >
                                         <ExternalLink className="w-4 h-4" />
-                                        View Certificate
+                                        {t('adminSkills.viewCertificate')}
                                     </a>
                                 </CardContent>
                             </Card>
@@ -253,7 +279,7 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                         {/* Quick Actions */}
                         <Card>
                             <CardHeader>
-                                <CardTitle>Quick Actions</CardTitle>
+                                <CardTitle>{t('adminSkills.quickActions')}</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-3">
                                 <Button
@@ -263,7 +289,7 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                                     className="w-full justify-start"
                                 >
                                     <Star className={`w-4 h-4 mr-2 ${skill.featured ? 'fill-yellow-400 text-yellow-400' : ''}`} />
-                                    {skill.featured ? 'Remove from Featured' : 'Add to Featured'}
+                                    {skill.featured ? t('adminSkills.removeFeatured') : t('adminSkills.addFeatured')}
                                 </Button>
                                 <Button
                                     variant="outline"
@@ -274,12 +300,12 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                                     {skill.active ? (
                                         <>
                                             <EyeOff className="w-4 h-4 mr-2" />
-                                            Deactivate
+                                            {t('adminSkills.deactivate')}
                                         </>
                                     ) : (
                                         <>
                                             <Eye className="w-4 h-4 mr-2" />
-                                            Activate
+                                            {t('adminSkills.activate')}
                                         </>
                                     )}
                                 </Button>
@@ -291,7 +317,7 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                                     className="w-full justify-start"
                                 >
                                     <Trash2 className="w-4 h-4 mr-2" />
-                                    Delete Skill
+                                    {t('adminSkills.deleteSkill')}
                                 </Button>
                             </CardContent>
                         </Card>
@@ -299,29 +325,29 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                         {/* Status Information */}
                         <Card>
                             <CardHeader>
-                                <CardTitle>Status</CardTitle>
+                                <CardTitle>{t('adminSkills.managementOptions')}</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
                                 <div className="flex items-center justify-between">
-                                    <span className="text-sm font-medium">Featured</span>
+                                    <span className="text-sm font-medium">{t('adminSkills.featured')}</span>
                                     <Badge variant={skill.featured ? 'default' : 'secondary'}>
-                                        {skill.featured ? 'Yes' : 'No'}
+                                        {skill.featured ? t('common.yes') : t('common.no')}
                                     </Badge>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-sm font-medium">Active</span>
+                                    <span className="text-sm font-medium">{t('adminSkills.active')}</span>
                                     <Badge variant={skill.active ? 'default' : 'secondary'}>
-                                        {skill.active ? 'Yes' : 'No'}
+                                        {skill.active ? t('common.yes') : t('common.no')}
                                     </Badge>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-sm font-medium">Category</span>
+                                    <span className="text-sm font-medium">{t('adminSkills.category')}</span>
                                     <Badge variant="outline" className="capitalize">
                                         {skill.category.replace('_', ' ')}
                                     </Badge>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-sm font-medium">Type</span>
+                                    <span className="text-sm font-medium">{t('adminSkills.type')}</span>
                                     <Badge variant="outline" className="capitalize">
                                         {skill.type.replace('_', ' ')}
                                     </Badge>
@@ -332,17 +358,17 @@ export default function ShowSkill({ skill }: ShowSkillProps) {
                         {/* Meta Information */}
                         <Card>
                             <CardHeader>
-                                <CardTitle>Meta Information</CardTitle>
+                                <CardTitle>{t('common.metadata')}</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-3 text-sm">
                                 <div>
-                                    <span className="font-medium">Created:</span>
+                                    <span className="font-medium">{t('common.createdAt')}:</span>
                                     <div className="text-gray-600 dark:text-gray-400">
                                         {formatDate(skill.created_at)}
                                     </div>
                                 </div>
                                 <div>
-                                    <span className="font-medium">Last Updated:</span>
+                                    <span className="font-medium">{t('common.updatedAt')}:</span>
                                     <div className="text-gray-600 dark:text-gray-400">
                                         {formatDate(skill.updated_at)}
                                     </div>

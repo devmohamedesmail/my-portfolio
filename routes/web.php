@@ -82,6 +82,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         
         // Clients Routes
         Route::resource('clients', \App\Http\Controllers\ClientController::class);
+        
+        // Imports Routes
+        Route::resource('imports', \App\Http\Controllers\ImportController::class);
     });
 });
 
