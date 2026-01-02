@@ -3,6 +3,8 @@
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 export function HeroSection() {
     const { t } = useTranslation();
@@ -13,6 +15,20 @@ export function HeroSection() {
             element.scrollIntoView({ behavior: 'smooth' });
         }
     };
+
+
+    useGSAP(() => {
+        gsap.to(".box-letter", {
+            y: 50,
+            repeat: -1,
+            yoyo: true,
+            stagger: 0.5,
+            duration: 1,
+            ease: "power1.inOut",
+        })
+    })
+
+
 
     return (
         <section
@@ -26,9 +42,27 @@ export function HeroSection() {
                         <p className="text-lg md:text-xl text-muted-foreground">
                             {t('hero.greeting')}
                         </p>
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                            Mohamed Esmail
-                        </h1>
+                        <div className="name flex gap-10 flex-col md:flex-row-reverse items-center justify-center ">
+                            <div className='flex flex-row-reverse gap-2'>
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>M</span>
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>O</span>
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>H</span>
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>A</span>
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>M</span>
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>E</span>
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>D</span>
+                            </div>
+                            <div className='flex flex-row-reverse gap-2' >
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>E</span>
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>S</span>
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>M</span>
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>A</span>
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>I</span>
+                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>L</span>
+                            </div>
+                        </div>
+                       
+
                         <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground/90">
                             {t('hero.role')}
                         </h2>

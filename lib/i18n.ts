@@ -36,13 +36,24 @@ const resources = {
                 backend: 'Backend',
                 database: 'Database',
                 tools: 'Tools & Others',
-                
+
             },
             projects: {
                 title: 'Featured Projects',
                 subtitle: 'Some of my recent work',
                 viewProject: 'View Project',
                 sourceCode: 'Source Code',
+                liveUrl: 'Live URL',
+                githubUrl: 'GitHub URL',
+                categories: {
+                    all: "All",
+                    frontend: "Frontend",
+                    backend: "Backend",
+                    database: "Database",
+                    tools: "Tools & Others",
+                    mobile: "Mobile",
+                    web: "Web",
+                }
             },
             experience: {
                 title: 'Work Experience',
@@ -105,6 +116,17 @@ const resources = {
                 subtitle: 'بعض من أعمالي الحديثة',
                 viewProject: 'عرض المشروع',
                 sourceCode: 'الكود المصدري',
+                liveUrl: 'رابط المعاينة',
+                githubUrl: 'رابط GitHub',
+                categories: {
+                    all: 'الكل',
+                    frontend: 'الواجهة الأمامية',
+                    backend: 'الواجهة الخلفية',
+                    database: 'قواعد البيانات',
+                    tools: 'الأدوات وأخرى',
+                    mobile: 'تطبيقات الموبايل',
+                    web: 'تطبيقات الويب',
+                }
             },
             experience: {
                 title: 'الخبرة العملية',

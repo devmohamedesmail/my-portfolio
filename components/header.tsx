@@ -11,6 +11,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import Logo from './ui/logo';
 
 export function Header() {
     const { t, i18n } = useTranslation();
@@ -50,7 +51,7 @@ export function Header() {
         <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
             <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
                 <div className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                    Portfolio
+                    <Logo />
                 </div>
 
                 {/* Desktop Navigation */}

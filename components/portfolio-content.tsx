@@ -11,6 +11,7 @@ import { ProjectsSection } from '@/components/sections/projects';
 import { ExperienceSection } from '@/components/sections/experience';
 import { ContactSection } from '@/components/sections/contact';
 import Test from './gsap/Test';
+import FloatButtons from './ui/float-buttons';
 
 export function PortfolioContent() {
     useEffect(() => {
@@ -24,13 +25,14 @@ export function PortfolioContent() {
             <main className="min-h-screen">
                
                 <HeroSection />
-                  <Test />
+                  {/* <Test /> */}
                 <AboutSection />
                 
                 <SkillsSection />
                 <ProjectsSection />
                 <ExperienceSection />
                 <ContactSection />
+                <FloatButtons />
             </main>
             <Footer />
         </>

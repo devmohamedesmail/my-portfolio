@@ -30,37 +30,37 @@ export function SkillsSection() {
                 {
                     name: 'HTML',
                     color: 'from-blue-500 to-cyan-500',
-                    image: '/icons/skills/html.svg',
+                    image: '/images/skills/html.svg',
                 },
                 {
                     name: 'CSS',
                     color: 'from-blue-500 to-cyan-500',
-                    image: '/icons/skills/css.svg',
+                    image: '/images/skills/css.svg',
                 },
                 {
                     name: 'JS',
                     color: 'from-blue-500 to-cyan-500',
-                    image: '/icons/skills/js.svg',
+                    image: '/images/skills/js.svg',
                 },
                 {
                     name: 'React',
                     color: 'from-blue-500 to-cyan-500',
-                    image: '/icons/skills/reactjs.svg',
+                    image: '/images/skills/reactjs.svg',
                 },
                 {
                     name: 'Next.js',
                     color: 'from-gray-700 to-black',
-                    image: '/icons/skills/nextjs-1.svg',
+                    image: '/images/skills/nextjs-1.svg',
                 },
                 {
                     name: 'Tailwind CSS',
                     color: 'from-cyan-400 to-blue-500',
-                    image: '/icons/skills/tailwind.svg',
+                    image: '/images/skills/tailwind.svg',
                 },
                 {
                     name: 'TypeScript',
                     color: 'from-blue-600 to-blue-800',
-                    image: '/icons/skills/typescript.svg',
+                    image: '/images/skills/typescript.svg',
                 },
             ],
         },
@@ -71,32 +71,32 @@ export function SkillsSection() {
                 {
                     name: 'Node.js',
                     color: 'from-green-500 to-green-700',
-                    image: '/icons/skills/nodejs-1.svg',
+                    image: '/images/skills/nodejs-1.svg',
                 },
                 {
                     name: 'Express.js',
                     color: 'from-gray-600 to-gray-800',
-                    image: '/icons/skills/nodejs-1.svg',
+                    image: '/images/skills/nodejs-1.svg',
                 },
                 {
                     name: 'Laravel',
                     color: 'from-red-500 to-red-700',
-                    image: '/icons/skills/laravel.svg',
+                    image: '/images/skills/laravel.svg',
                 },
                 {
                     name: 'REST API',
                     color: 'from-indigo-500 to-purple-600',
-                    image: '/icons/skills/api.svg',
+                    image: '/images/skills/api.svg',
                 },
                 {
                     name: 'GraphQL',
                     color: 'from-indigo-500 to-purple-600',
-                    image: '/icons/skills/graphql.svg',
+                    image: '/images/skills/graphql.svg',
                 },
                 {
                     name: 'Strapi',
                     color: 'from-indigo-500 to-purple-600',
-                    image: '/icons/skills/strapi-1.svg',
+                    image: '/images/skills/strapi-1.svg',
                 },
             ],
         },
@@ -107,17 +107,17 @@ export function SkillsSection() {
                 {
                     name: 'MongoDB',
                     color: 'from-green-600 to-green-800',
-                    image: '/icons/skills/mongodb.svg',
+                    image: '/images/skills/mongodb.svg',
                 },
                 {
                     name: 'MySQL',
                     color: 'from-blue-600 to-orange-500',
-                    image: '/icons/skills/mysql.svg',
+                    image: '/images/skills/mysql.svg',
                 },
                 {
                     name: 'Prisma',
                     color: 'from-indigo-500 to-purple-600',
-                    image: '/icons/skills/prisma.svg',
+                    image: '/images/skills/prisma.svg',
                 },
             ],
         },
@@ -127,22 +127,22 @@ export function SkillsSection() {
                 { 
                     name: 'Docker', 
                     color: 'from-blue-500 to-sky-600', 
-                    image: '/icons/skills/docker.svg' 
+                    image: '/images/skills/docker.svg' 
                 },
                 { 
                     name: 'Git', 
                     color: 'from-orange-500 to-red-600', 
-                    image: '/icons/skills/git.svg' 
+                    image: '/images/skills/git.svg' 
                 },
                 { 
                     name: 'GitHub', 
                     color: 'from-gray-700 to-black', 
-                    image: '/icons/skills/github.svg' 
+                    image: '/images/skills/github.svg' 
                 },
                 { 
                     name: 'CI/CD', 
                     color: 'from-purple-500 to-indigo-600', 
-                    image: '/icons/skills/ci-cd.svg' 
+                    image: '/images/skills/ci-cd.svg' 
                 },
             ],
         },
