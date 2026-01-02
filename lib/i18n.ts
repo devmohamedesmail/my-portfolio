@@ -36,6 +36,7 @@ const resources = {
                 backend: 'Backend',
                 database: 'Database',
                 tools: 'Tools & Others',
+                
             },
             projects: {
                 title: 'Featured Projects',
