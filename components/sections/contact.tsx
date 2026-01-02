@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, Github, Linkedin, MessageCircle } from 'lucide-react';
 
 export function ContactSection() {
     const { t } = useTranslation();
@@ -39,15 +39,15 @@ export function ContactSection() {
     };
 
     const contactInfo = [
-        { icon: Mail, label: 'Email', value: 'contact@example.com', href: 'mailto:contact@example.com' },
-        { icon: Phone, label: 'Phone', value: '+1 234 567 8900', href: 'tel:+12345678900' },
-        { icon: MapPin, label: 'Location', value: 'San Francisco, CA', href: '#' },
+        { icon: Mail, label: t('contact.emailLabel'), value: 'me6222080@gmail.com', href: 'mailto:me6222080@gmail.com' },
+        { icon: Phone, label: t('contact.phoneLabel'), value: '+971 58 910 7126', href: 'tel:+971589107126' },
+        { icon: MessageCircle, label: t('contact.whatsappLabel'), value: '+971 58 910 7126', href: 'https://wa.me/+971589107126' },
+        { icon: MapPin, label: t('contact.locationLabel'), value: 'Dubai, UAE', href: '#' },
     ];
 
     const socialLinks = [
-        { icon: Github, label: 'GitHub', href: 'https://github.com' },
-        { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com' },
-        { icon: Twitter, label: 'Twitter', href: 'https://twitter.com' },
+        { icon: Github, label: t('contact.githubLabel'), href: 'https://github.com/devmohamedesmail' },
+        { icon: Linkedin, label: t('contact.linkedinLabel'), href: 'https://www.linkedin.com/in/mohamed-esmail-bbb20431b/' },
     ];
 
     return (
@@ -68,7 +68,7 @@ export function ContactSection() {
                         {/* Contact Info */}
                         <div className="space-y-6">
                             <Card className="p-6">
-                                <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
+                                <h3 className="text-xl font-semibold mb-4">{t('contact.infoTitle')}</h3>
                                 <div className="space-y-4">
                                     {contactInfo.map((info, index) => {
                                         const Icon = info.icon;
@@ -76,6 +76,8 @@ export function ContactSection() {
                                             <a
                                                 key={index}
                                                 href={info.href}
+                                                target={index === 2 ? '_blank' : undefined}
+                                                rel={index === 2 ? 'noopener noreferrer' : undefined}
                                                 className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
                                             >
                                                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -93,7 +95,7 @@ export function ContactSection() {
 
                             {/* Social Links */}
                             <Card className="p-6">
-                                <h3 className="text-xl font-semibold mb-4">Follow Me</h3>
+                                <h3 className="text-xl font-semibold mb-4">{t('contact.followTitle')}</h3>
                                 <div className="flex gap-3">
                                     {socialLinks.map((social, index) => {
                                         const Icon = social.icon;
