@@ -23,11 +23,8 @@ export function PortfolioContent() {
             <Header />
            
             <main className="min-h-screen">
-               
                 <HeroSection />
-                  {/* <Test /> */}
                 <AboutSection />
-                
                 <SkillsSection />
                 <ProjectsSection />
                 <ExperienceSection />

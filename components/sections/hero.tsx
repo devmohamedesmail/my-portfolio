@@ -42,27 +42,8 @@ export function HeroSection() {
                         <p className="text-lg md:text-xl text-muted-foreground">
                             {t('hero.greeting')}
                         </p>
-                        <div className="name flex gap-10 flex-col md:flex-row-reverse items-center justify-center ">
-                            <div className='flex flex-row-reverse gap-2'>
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>M</span>
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>O</span>
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>H</span>
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>A</span>
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>M</span>
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>E</span>
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>D</span>
-                            </div>
-                            <div className='flex flex-row-reverse gap-2' >
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>E</span>
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>S</span>
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>M</span>
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>A</span>
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>I</span>
-                                <span className='text-3xl font-extrabold box-letter shadow-lg rounded-lg bg-white dark:bg-black/90 w-16 h-16 flex items-center justify-center'>L</span>
-                            </div>
-                        </div>
+                        <h1 className='text-4xl font-extrabold text-foreground'>MOHAMED ESMAIL</h1>
                        
-
                         <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground/90">
                             {t('hero.role')}
                         </h2>
