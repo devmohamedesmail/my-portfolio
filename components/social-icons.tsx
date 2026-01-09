@@ -13,11 +13,10 @@ export default function SocialIcons() {
         <div className='flex items-center justify-center gap-4'>
 
             {items.map((item) => (
-                <div key={item.name} className='icon-container flex items-center gap-2 hover:cursor-pointer hover:text-primary bg-primary/10 p-2 rounded-full px-4'>
+                <a href={item.link} key={item.name} className='icon-container flex items-center gap-2 hover:cursor-pointer hover:text-primary bg-primary/10 p-2 rounded-full px-4'>
                      <span className='text-xs icon-text'>{item.name}</span>
-                    {item.icon}
-                  
-                </div>
+                     {item.icon}
+                </a>
             ))} 
         </div>
     )
