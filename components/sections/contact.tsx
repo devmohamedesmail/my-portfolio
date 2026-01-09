@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Mail, MapPin, Phone, Send, Github, Linkedin, MessageCircle } from 'lucide-react';
+import SocialIcons from '../social-icons';
 
 export function ContactSection() {
     const { t } = useTranslation();
@@ -96,23 +97,7 @@ export function ContactSection() {
                             {/* Social Links */}
                             <Card className="p-6">
                                 <h3 className="text-xl font-semibold mb-4">{t('contact.followTitle')}</h3>
-                                <div className="flex gap-3">
-                                    {socialLinks.map((social, index) => {
-                                        const Icon = social.icon;
-                                        return (
-                                            <a
-                                                key={index}
-                                                href={social.href}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all"
-                                                aria-label={social.label}
-                                            >
-                                                <Icon className="h-5 w-5" />
-                                            </a>
-                                        );
-                                    })}
-                                </div>
+                                <SocialIcons />
                             </Card>
                         </div>
 

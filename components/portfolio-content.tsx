@@ -10,7 +10,6 @@ import { SkillsSection } from '@/components/sections/skills';
 import { ProjectsSection } from '@/components/sections/projects';
 import { ExperienceSection } from '@/components/sections/experience';
 import { ContactSection } from '@/components/sections/contact';
-import Test from './gsap/Test';
 import FloatButtons from './ui/float-buttons';
 
 export function PortfolioContent() {

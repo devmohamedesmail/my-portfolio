@@ -150,3 +150,10 @@
     animation-delay: 1s;
   }
 }
+
+
+
+.icon-container:hover .icon-text {
+  max-width: auto !important;
+  transition: max-width 0.3s ease-in-out;
+}

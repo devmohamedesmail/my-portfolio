@@ -5,6 +5,7 @@ import { ArrowRight, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import SocialIcons from '../social-icons';
 
 export function HeroSection() {
     const { t } = useTranslation();
@@ -53,6 +54,8 @@ export function HeroSection() {
                     <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                         {t('hero.description')}
                     </p>
+
+                    <SocialIcons />
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
