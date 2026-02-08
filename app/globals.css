@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -54,7 +55,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: #171717;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -156,4 +157,68 @@
 .icon-container:hover .icon-text {
   max-width: auto !important;
   transition: max-width 0.3s ease-in-out;
+}
+
+html[lang="ar"] {
+  font-family: 'Cairo', sans-serif;
+}
+
+/* Navigation Link Animations */
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), rgba(147, 51, 234, 0.8));
+  transition: width 0.3s ease-in-out;
+  border-radius: 2px;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Mobile Navigation Link */
+.nav-link-mobile {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link-mobile::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--primary);
+  transition: height 0.3s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+.nav-link-mobile:hover::before {
+  height: 70%;
+}
+
+/* RTL Support */
+html[dir="rtl"] .nav-link-mobile:hover {
+  transform: translateX(-0.25rem);
+}
+
+html[dir="rtl"] .nav-link-mobile::before {
+  left: auto;
+  right: 0;
+  border-radius: 2px 0 0 2px;
 }

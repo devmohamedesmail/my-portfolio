@@ -60,7 +60,7 @@ export function Header() {
                         <button
                             key={item.key}
                             onClick={() => scrollToSection(item.id)}
-                            className="text-sm font-medium hover:text-primary transition-colors"
+                            className="nav-link relative text-sm font-medium transition-all duration-300 hover:text-primary hover:-translate-y-0.5"
                         >
                             {t(`nav.${item.key}`)}
                         </button>
@@ -123,7 +123,7 @@ export function Header() {
                             <button
                                 key={item.key}
                                 onClick={() => scrollToSection(item.id)}
-                                className="text-left py-2 px-4 rounded-md hover:bg-accent transition-colors"
+                                className="nav-link-mobile text-left py-2 px-4 rounded-md transition-all duration-300 hover:bg-accent hover:translate-x-1"
                             >
                                 {t(`nav.${item.key}`)}
                             </button>
